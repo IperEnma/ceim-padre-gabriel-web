@@ -118,7 +118,7 @@ export function GalleryCarousel() {
         ))}
       </div>
       <p className="upload-hint">
-        Imágenes de referencia — pronto fotografías de nuestras instalaciones y actividades
+        Imágenes de referencia — pronto fotos de nuestras instalaciones y actividades
       </p>
     </div>
   );

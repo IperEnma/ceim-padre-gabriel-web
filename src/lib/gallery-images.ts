@@ -19,7 +19,7 @@ export const gallerySlides = [
     src: "/fotos/excelencia-educativa.jpg",
     alt: "Excelencia Educativa",
     title: "Excelencia Educativa",
-    text: "Docentes comprometidas con más de 75 años formando niños y niñas en Nueva Esparta",
+    text: "Maestras y maestros comprometidos con más de 75 años formando niños y niñas en Nueva Esparta",
   },
   {
     bg: "#1E8449",
@@ -40,6 +40,6 @@ export const gallerySlides = [
     src: "/fotos/comunidad-educativa.jpeg",
     alt: "Comunidad Educativa",
     title: "Comunidad Educativa",
-    text: "Maestros, familias y niños unidos para construir una Venezuela mejor",
+    text: "Representantes, maestros y niños unidos para construir una Venezuela mejor",
   },
 ] as const;

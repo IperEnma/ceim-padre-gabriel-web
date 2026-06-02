@@ -181,7 +181,7 @@ export function CeimBook() {
                     <div className="hic">
                       <span className="hic-icon">🕗</span>
                       <strong>Horario</strong>
-                      <span>Lun–Vie · 7:30 – 3:30</span>
+                      <span>Lunes a Viernes · 7:30 a.m. – 3:30 p.m.</span>
                     </div>
                     <div className="hic">
                       <span className="hic-icon">👶</span>
@@ -212,7 +212,7 @@ export function CeimBook() {
                       <h3>Centro de Educación Inicial Municipal</h3>
                       <p>
                         Atención integral con valores sólidos y compromiso con la
-                        transformación del país.
+                        transformación de la Patria.
                       </p>
                       <div className="stats-row">
                         <div className="stat-item">
@@ -339,7 +339,7 @@ export function CeimBook() {
                       Somos una institución comprometida con la atención integral de niños y niñas
                       de 2 a 6 años. Planificamos actividades y proyectos orientados a fortalecer
                       el proceso de enseñanza-aprendizaje, formando individuos con valores capaces
-                      de incorporarse a la sociedad de manera participativa.
+                      de integrarse a la sociedad de manera participativa.
                     </p>
                   </div>
 
@@ -381,8 +381,8 @@ export function CeimBook() {
                   de Venezuela
                 </h2>
                 <p className="section-lead">
-                  Conoce los días feriados y fechas patrias que marcamos en nuestro calendario
-                  escolar. Momentos ideales para compartir en familia y fortalecer nuestra
+                  Consulta los días feriados y fechas patrias señalados en nuestro calendario
+                  escolar. Son momentos ideales para compartir en familia y fortalecer nuestra
                   identidad nacional.
                 </p>
                 <HolidayCalendar />
@@ -396,7 +396,7 @@ export function CeimBook() {
                 <span className="section-tag">Galería</span>
                 <h2 className="section-title">Nuestra institución</h2>
                 <p className="section-lead">
-                  Espacios y momentos que hacen parte de nuestra comunidad educativa.
+                  Espacios y momentos que forman parte de nuestra comunidad educativa.
                 </p>
                 <GalleryCarousel />
               </div>
@@ -413,8 +413,8 @@ export function CeimBook() {
                   Porlamar, Nueva Esparta
                 </h2>
                 <p className="section-lead">
-                  ¿Tienes preguntas sobre inscripciones o nuestra propuesta educativa? Con gusto
-                  te atendemos.
+                  ¿Tienes preguntas sobre las inscripciones o nuestro proyecto educativo? Con
+                  mucho gusto te atenderemos.
                 </p>
 
                 <div className="contact-grid">
@@ -472,7 +472,7 @@ export function CeimBook() {
                       <br />
                       República Bolivariana de Venezuela
                     </p>
-                    <p className="contact-map-hint">Toca para abrir en Google Maps ↗</p>
+                    <p className="contact-map-hint">Pulsa aquí para abrir en Google Maps ↗</p>
                   </a>
                 </div>
               </div>
@@ -526,7 +526,7 @@ export function CeimBook() {
           <div className="ceim-swipe-hint-gesture" aria-hidden="true">
             <span className="ceim-swipe-hint-hand">👆</span>
           </div>
-          <p className="ceim-swipe-hint-text">Desliza hacia los lados para explorar</p>
+          <p className="ceim-swipe-hint-text">Desliza a los lados para recorrer las secciones</p>
         </div>
       ) : null}
     </div>

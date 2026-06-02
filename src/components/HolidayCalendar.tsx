@@ -26,13 +26,13 @@ const feriados2026: Record<number, Record<number, Holiday>> = {
       nombre: "Carnaval",
       tipo: "movible",
       icon: "🎭",
-      desc: "Fiesta popular con desfiles, disfraces y tradiciones culturales.",
+      desc: "Fiesta popular con comparsas, disfraces y tradiciones de la región.",
     },
     17: {
       nombre: "Carnaval",
       tipo: "movible",
       icon: "🎭",
-      desc: "Fiesta popular con desfiles, disfraces y tradiciones culturales.",
+      desc: "Fiesta popular con comparsas, disfraces y tradiciones de la región.",
     },
   },
   3: {
