@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CEIM_LOGO_SRC } from "@/lib/ceim-logo";
 import "./globals.css";
-import { site } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,24 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: site.name,
-    template: `%s | ${site.shortName}`,
-  },
-  description: site.description,
-  applicationName: site.shortName,
-  keywords: [...site.keywords],
-  openGraph: {
-    type: "website",
-    url: site.url,
-    siteName: site.name,
-    title: site.name,
-    description: site.description,
-    locale: "es_AR",
-  },
-  alternates: {
-    canonical: site.url,
+  title: 'C.E.I.M. "Padre Gabriel Figueras Llagostera"',
+  description:
+    "Centro de Educación Inicial Municipal en Porlamar, Nueva Esparta. Historia, misión, visión, feriados, galería y contacto.",
+  icons: {
+    icon: CEIM_LOGO_SRC,
+    shortcut: CEIM_LOGO_SRC,
+    apple: CEIM_LOGO_SRC,
   },
 };
 
@@ -44,8 +33,9 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {children}
       </body>
     </html>

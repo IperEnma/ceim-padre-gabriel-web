@@ -1,0 +1,1672 @@
+:root {
+  /* Paleta infantil viva — inspirada en el arcoíris */
+  --white: #ffffff;
+  --off-white: #fffef7;
+  --dark: #1a1a1a;
+  --ink: #1a1a1a;
+  --muted: #5a6070;
+  --card-bg: #ffffff;
+
+  /* Colores por sección */
+  --pg-inicio: #fff9ec;
+  --pg-historia: #ff6b6b;
+  --pg-mvv: #fffbe6;
+  --pg-feriados: #4ecdc4;
+  --pg-galeria: #a78bfa;
+  --pg-contacto: #45b7d1;
+
+  /* Acentos */
+  --blue: #1a3a8f;
+  --blue-mid: #2b52b6;
+  --blue-light: #4a78d4;
+  --yellow: #ffd043;
+  --yellow-deep: #f5b014;
+  --forest: #2d6a4f;
+}
+
+.ceim-body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, Roboto,
+    Arial, sans-serif;
+  background: var(--off-white);
+  color: var(--ink);
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: 100vw;
+}
+
+.ceim-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 4rem;
+  background: rgba(247, 244, 239, 0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 3px solid var(--yellow);
+}
+
+.ceim-navLinks {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.ceim-navLink {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  text-decoration: none;
+}
+.ceim-navLink:hover {
+  color: var(--blue);
+}
+
+.ceim-book {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.ceim-pages {
+  display: flex;
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+  width: 100%;
+}
+
+.ceim-page {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+  padding-bottom: 64px;
+}
+
+.ceim-section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: 6rem 8% 4rem;
+  position: relative;
+  overflow: visible;
+}
+
+.ceim-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+
+.ceim-title {
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  color: var(--ink);
+}
+
+.ceim-lead {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 640px;
+  font-weight: 400;
+}
+
+.ceim-indicator {
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  display: flex;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 0.65rem 1.4rem;
+  border-radius: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ceim-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+.ceim-dotActive {
+  background: #ff6b9d;
+  transform: scale(1.5);
+}
+
+.ceim-navBtn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 98;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  color: var(--ink);
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+.ceim-navBtn:hover {
+  background: var(--dark);
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+.ceim-navBtn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ceim-prev {
+  left: 2rem;
+}
+.ceim-next {
+  right: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .ceim-nav {
+    padding: 0.8rem 2rem;
+  }
+  .ceim-section {
+    padding: 5.5rem 5% 3rem;
+  }
+}
+@media (max-width: 768px) {
+  .ceim-nav {
+    padding: 0.75rem 1.25rem;
+  }
+  .ceim-navLinks {
+    display: none;
+  }
+  .ceim-section {
+    padding: 5.5rem 4% 4rem;
+  }
+}
+
+/* ── GALLERY (igual al index.html) ── */
+.ceim-galeria .ceim-tag {
+  color: var(--yellow);
+}
+.ceim-galeria .ceim-title {
+  color: #fff;
+}
+.ceim-galeria .ceim-lead {
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2.5rem;
+}
+
+.carousel-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  width: 100%;
+}
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  aspect-ratio: 1080 / 566;
+  max-height: 566px;
+}
+.slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.carousel-slide:hover .slide-img {
+  transform: scale(1.04);
+}
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 55%);
+}
+.slide-caption {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 2.5rem;
+  width: 100%;
+}
+.slide-caption h3 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+.slide-caption p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  padding: 0;
+}
+.carousel-btn:hover {
+  background: var(--blue);
+  transform: translateY(-50%);
+}
+.carousel-btn.prev {
+  left: 1rem;
+}
+.carousel-btn.next {
+  right: 1rem;
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+  min-width: 7px;
+}
+.dot.active {
+  background: var(--yellow);
+  transform: scale(1.4);
+}
+.upload-hint {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.05em;
+}
+
+/* ── CALENDARIO (igual al index.html) ── */
+.calendar-dashboard {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  width: 100%;
+}
+.calendar-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 680px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.calendar-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.calendar-header h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a3a8f;
+  text-transform: capitalize;
+}
+.cal-btn {
+  background: #ffffff;
+  border: 1.5px solid rgba(26, 58, 143, 0.15);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1a3a8f;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+}
+.cal-btn:hover {
+  background: #1a3a8f;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 5px 12px rgba(26, 58, 143, 0.25);
+}
+.cal-btn:active {
+  transform: scale(0.95);
+}
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+.day-cell {
+  position: relative;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1rem;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.day-cell.empty {
+  opacity: 0.35;
+  background: rgba(255, 255, 255, 0.35);
+}
+.day-cell.today {
+  box-shadow: 0 0 0 3px rgba(255, 208, 67, 0.45);
+  border-color: rgba(255, 208, 67, 0.55);
+}
+.day-number {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.55);
+}
+.day-emoji {
+  font-size: 1.05rem;
+}
+.day-cell.has-feriado {
+  cursor: pointer;
+}
+.day-cell.has-feriado:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+.day-cell.has-feriado.fijo {
+  box-shadow: 0 0 0 2px rgba(26, 58, 143, 0.15) inset;
+}
+.day-cell.has-feriado.movible {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08) inset;
+}
+.day-cell.has-feriado.patrio {
+  box-shadow: 0 0 0 2px rgba(255, 100, 50, 0.18) inset;
+}
+
+.holiday-tooltip {
+  position: fixed;
+  z-index: 9999;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  padding: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+.holiday-tooltip.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.tooltip-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.tooltip-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 1rem;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 208, 67, 0.35);
+  font-size: 1.2rem;
+}
+.tooltip-title {
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1.1;
+}
+.tooltip-desc {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.event-type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.65);
+}
+.event-type-badge.fijo {
+  background: rgba(26, 58, 143, 0.12);
+  color: var(--blue);
+}
+.event-type-badge.movible {
+  background: rgba(0, 0, 0, 0.08);
+  color: #444;
+}
+.event-type-badge.patrio {
+  background: rgba(255, 100, 50, 0.15);
+  color: #c0392b;
+}
+.event-date-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+
+/* ── HERO (from index.html) ── */
+
+/* nav-logo */
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .nav-logo-text {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--blue);
+      line-height: 1.3;
+      max-width: 220px;
+    }
+
+/* hero */
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 8% 4rem;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      max-width: 900px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-desc {
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--dark);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 0;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 2px solid var(--dark);
+      color: var(--dark);
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /* Hero two-column layout */
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4rem;
+      width: 100%;
+    }
+
+    .hero-text {
+      max-width: 800px;
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-shield {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .hero-card {
+      width: 280px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.07);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      color: var(--blue);
+    }
+
+    .hero-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--blue);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.63rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Hero info cards */
+    .hero-info-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      max-width: 700px;
+    }
+
+    .hic {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      background: #fff;
+      padding: 1.1rem 1.25rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .hic-icon {
+      font-size: 1.3rem;
+    }
+
+    .hic strong {
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .hic span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .contact-detail {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-ico {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      border-radius: 0.5rem;
+    }
+
+    .contact-detail strong {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.45);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-detail span,
+    .contact-detail a {
+      font-size: 0.92rem;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.6;
+    }
+
+    .contact-detail a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-map {
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 112, 67, 0.3);
+      padding: 2.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      transition: background 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: var(--ink);
+      border-radius: 0.25rem;
+    }
+
+    .contact-map:hover {
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-map .map-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-map p {
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.65);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .contact-map-hint {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.45);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FOOTER ── */
+    .ceim-footer {
+      background: #2d2d2d;
+      padding: 0.75rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      border-top: 3px solid var(--yellow);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 97;
+    }
+
+    .footer-brand {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .ceim-footer small {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 1024px) {
+      #hero {
+        padding: 7rem 5% 4rem;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .mvv-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feriados-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-info-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.75rem 1.25rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 5.5rem 4% 4rem;
+      }
+
+      #hero {
+        padding: 6rem 4% 3rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.8rem, 10vw, 5rem);
+      }
+
+      .section-title {
+        font-size: clamp(2.4rem, 9vw, 4.5rem);
+      }
+
+      .mvv-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .feriados-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-info-cards {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+      }
+
+      .ceim-footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: clamp(2.4rem, 11vw, 3.5rem);
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+      }
+
+      .hero-info-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+
+
+/* page-backgrounds */
+    /* ══════════════════════════════════════════
+       FONDO INFANTIL SVG REAL
+       ══════════════════════════════════════════ */
+    #pagina-inicio .ceim-section,
+    #pagina-historia section,
+    #pagina-mvv section,
+    #pagina-feriados section,
+    #pagina-galeria section,
+    #pagina-contacto section,
+    #galeria,
+    #mvv,
+    #contacto,
+    #hero {
+      background: transparent !important;
+    }
+
+    #pagina-inicio {
+      background-color: #FFFDE7;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Soles%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C80%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-52%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2252%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-52%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2252%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-37%22%20y2%3D%22-37%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2237%22%20y2%3D%22-37%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-37%22%20y2%3D%2237%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2237%22%20y2%3D%2237%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281340%2C120%29%20scale%280.65%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFCA28%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-52%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2252%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-52%22%20y2%3D%220%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2252%22%20y2%3D%220%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-37%22%20y2%3D%22-37%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2237%22%20y2%3D%22-37%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-37%22%20y2%3D%2237%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2237%22%20y2%3D%2237%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Nubes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C60%29%22%20opacity%3D%220.8%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28900%2C40%29%20scale%280.8%29%22%20opacity%3D%220.7%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281200%2C700%29%20scale%280.7%29%22%20opacity%3D%220.6%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20--%3E%0A%20%20%3Cpolygon%20points%3D%221380%2C700%201387%2C720%201408%2C720%201392%2C733%201398%2C753%201380%2C741%201362%2C753%201368%2C733%201352%2C720%201373%2C720%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%2260%2C750%2065%2C765%2081%2C765%2069%2C774%2074%2C789%2060%2C780%2046%2C789%2051%2C774%2039%2C765%2055%2C765%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C820%20704%2C832%20717%2C832%20707%2C840%20711%2C852%20700%2C845%20689%2C852%20693%2C840%20683%2C832%20696%2C832%22%20fill%3D%22%23FFC107%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%21--%20Mariposas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C200%29%22%20opacity%3D%220.6%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FF80AB%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FF80AB%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23F48FB1%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23F48FB1%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%234A148C%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28200%2C600%29%20scale%280.8%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%2380DEEA%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%2380DEEA%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%234DD0E1%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%234DD0E1%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%23006064%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Flores%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28550%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-22%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2221%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2213%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-13%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-21%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2213%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281300%2C820%29%20scale%280.8%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-22%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2221%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2213%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-13%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-21%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2213%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Pelota%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281400%2C500%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2230%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-30%2C0%20Q0%2C-30%2030%2C0%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-30%2C0%20Q0%2C30%2030%2C0%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-30%20Q20%2C0%200%2C30%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-30%20Q-20%2C0%200%2C30%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    #pagina-historia {
+      background-color: #FCE4EC;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Corazones%20grandes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C100%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281360%2C150%29%20scale%281.2%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23F48FB1%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28180%2C780%29%20scale%280.8%29%22%20opacity%3D%220.4%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C750%29%20scale%280.9%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23E91E63%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Arcoiris%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28700%2C100%29%22%20opacity%3D%220.35%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-200%2C80%20A200%2C200%200%200%2C1%20200%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FF5252%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-170%2C80%20A170%2C170%200%200%2C1%20170%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FF9800%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-142%2C80%20A142%2C142%200%200%2C1%20142%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FFEB3B%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-115%2C80%20A115%2C115%200%200%2C1%20115%2C80%22%20fill%3D%22none%22%20stroke%3D%22%234CAF50%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-88%2C80%20A88%2C88%200%200%2C1%2088%2C80%22%20fill%3D%22none%22%20stroke%3D%22%232196F3%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-62%2C80%20A62%2C62%200%200%2C1%2062%2C80%22%20fill%3D%22none%22%20stroke%3D%22%239C27B0%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22100%2C500%20106%2C518%20125%2C518%20111%2C529%20116%2C547%20100%2C537%2084%2C547%2089%2C529%2075%2C518%2094%2C518%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221350%2C600%201355%2C615%201371%2C615%201358%2C624%201363%2C639%201350%2C630%201337%2C639%201342%2C624%201329%2C615%201345%2C615%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22500%2C850%20504%2C862%20517%2C862%20507%2C870%20511%2C882%20500%2C875%20489%2C882%20493%2C870%20483%2C862%20496%2C862%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3C%21--%20Mariposas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C200%29%20scale%281.3%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23FFCA28%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23FFCA28%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%23E65100%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Lunares%20decorativos%20--%3E%0A%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%2250%22%20r%3D%2212%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22900%22%20cy%3D%22870%22%20r%3D%2216%22%20fill%3D%22%23F48FB1%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221250%22%20cy%3D%22400%22%20r%3D%2210%22%20fill%3D%22%23FF4081%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%22400%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.4%22%2F%3E%0A%3C%2Fsvg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    #pagina-mvv {
+      background-color: #E3F2FD;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Globos%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28100%2C200%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%2364B5F6%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-6%2C50%206%2C50%22%20fill%3D%22%2364B5F6%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2250%22%20x2%3D%225%22%20y2%3D%2290%22%20stroke%3D%22%2390CAF9%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281320%2C250%29%20scale%281.2%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-6%2C50%206%2C50%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2250%22%20x2%3D%22-5%22%20y2%3D%2290%22%20stroke%3D%22%23F48FB1%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28700%2C50%29%20scale%280.9%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23A5D6A7%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-6%2C50%206%2C50%22%20fill%3D%22%23A5D6A7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2250%22%20x2%3D%220%22%20y2%3D%2290%22%20stroke%3D%22%23C8E6C9%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Burbujas%20--%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22700%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22%2390CAF9%22%20stroke-width%3D%223%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22210%22%20cy%3D%22688%22%20r%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221300%22%20cy%3D%22650%22%20r%3D%2255%22%20fill%3D%22none%22%20stroke%3D%22%2381D4FA%22%20stroke-width%3D%223%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221312%22%20cy%3D%22636%22%20r%3D%2210%22%20fill%3D%22white%22%20opacity%3D%220.3%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22800%22%20r%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22%2364B5F6%22%20stroke-width%3D%223%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22900%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22none%22%20stroke%3D%22%23B3E5FC%22%20stroke-width%3D%223%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%21--%20Diamantes%20%2F%20rombos%20--%3E%0A%20%20%3Cpolygon%20points%3D%221380%2C400%201400%2C425%201380%2C450%201360%2C425%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%2260%2C600%2080%2C625%2060%2C650%2040%2C625%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C850%20720%2C875%20700%2C900%20680%2C875%22%20fill%3D%22%23FFCA28%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%21--%20Nubes%20peque%C3%B1as%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28400%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2245%22%20ry%3D%2225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-25%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2225%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C100%29%20scale%280.7%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2245%22%20ry%3D%2225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-25%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2225%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    #pagina-feriados {
+      background-color: #F1F8E9;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Flores%20grandes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C800%29%22%20opacity%3D%220.55%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-30%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-18%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-28%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2217%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2217%22%20x2%3D%220%22%20y2%3D%2270%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%2250%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%28-30%2C18%2C50%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%2260%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%2830%2C-18%2C60%29%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281350%2C750%29%20scale%281.1%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-30%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-18%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-28%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2217%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2217%22%20x2%3D%220%22%20y2%3D%2270%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%2250%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%28-30%2C18%2C50%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%2260%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%2830%2C-18%2C60%29%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Oruga%20%2F%20gusano%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28600%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2222%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2242%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FF7043%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2282%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FFA726%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22122%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FFEE58%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22162%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%2366BB6A%22%2F%3E%0A%20%20%20%20%3C%21--%20Cara%20--%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%223%22%20fill%3D%22%231A1A1A%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-8%2C5%20Q0%2C14%208%2C5%22%20fill%3D%22none%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-12%22%20y1%3D%22-22%22%20x2%3D%22-8%22%20y2%3D%22-32%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2212%22%20y1%3D%22-22%22%20x2%3D%228%22%20y2%3D%22-32%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-8%22%20cy%3D%22-33%22%20r%3D%223%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%228%22%20cy%3D%22-33%22%20r%3D%223%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Hojas%20volando%20--%3E%0A%20%20%3Cellipse%20cx%3D%22200%22%20cy%3D%22150%22%20rx%3D%2220%22%20ry%3D%2210%22%20fill%3D%22%2381C784%22%20opacity%3D%220.6%22%20transform%3D%22rotate%28-45%2C200%2C150%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%221250%22%20cy%3D%22200%22%20rx%3D%2220%22%20ry%3D%2210%22%20fill%3D%22%23AED581%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2830%2C1250%2C200%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%221100%22%20cy%3D%22800%22%20rx%3D%2216%22%20ry%3D%228%22%20fill%3D%22%2366BB6A%22%20opacity%3D%220.55%22%20transform%3D%22rotate%28-20%2C1100%2C800%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22300%22%20cy%3D%22650%22%20rx%3D%2218%22%20ry%3D%229%22%20fill%3D%22%23A5D6A7%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2850%2C300%2C650%29%22%2F%3E%0A%20%20%3C%21--%20Sol%20peque%C3%B1o%20esquina%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281380%2C80%29%20scale%280.7%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-55%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2255%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-55%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2255%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-39%22%20y2%3D%22-39%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2239%22%20y2%3D%22-39%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-39%22%20y2%3D%2239%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2239%22%20y2%3D%2239%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    #pagina-galeria {
+      background-color: #EDE7F6;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Cohete%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281350%2C200%29%20scale%281.0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%22-50%22%20rx%3D%2218%22%20ry%3D%2230%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-18%22%20y%3D%22-25%22%20width%3D%2236%22%20height%3D%2260%22%20rx%3D%225%22%20fill%3D%22%23E1BEE7%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-18%2C35%20-28%2C60%200%2C45%2028%2C60%2018%2C35%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2212%22%20r%3D%2212%22%20fill%3D%22%23B3E5FC%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-26%2C-5%20-40%2C10%20-18%2C10%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%2226%2C-5%2040%2C10%2018%2C10%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3C%21--%20llama%20--%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-7%22%20cy%3D%2255%22%20rx%3D%225%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%227%22%20cy%3D%2255%22%20rx%3D%225%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2258%22%20rx%3D%224%22%20ry%3D%2210%22%20fill%3D%22%23FF9800%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Luna%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28100%2C130%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-40%20A40%2C40%200%201%2C0%2028%2C28%20A30%2C30%200%201%2C1%200%2C-40Z%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28750%2C820%29%20scale%280.75%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-40%20A40%2C40%200%201%2C0%2028%2C28%20A30%2C30%200%201%2C1%200%2C-40Z%22%20fill%3D%22%23FFCA28%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20de%205%20puntas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22300%2C80%20307%2C102%20330%2C102%20312%2C116%20319%2C138%20300%2C125%20281%2C138%20288%2C116%20270%2C102%20293%2C102%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.65%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221100%2C100%201105%2C118%201124%2C118%201109%2C129%201114%2C147%201100%2C137%201086%2C147%201091%2C129%201076%2C118%201095%2C118%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22200%2C750%20205%2C765%20221%2C765%20208%2C774%20213%2C789%20200%2C780%20187%2C789%20192%2C774%20179%2C765%20195%2C765%22%20fill%3D%22%23CE93D8%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221200%2C700%201205%2C715%201221%2C715%201208%2C724%201213%2C739%201200%2C730%201187%2C739%201192%2C724%201179%2C715%201195%2C715%22%20fill%3D%22%23BA68C8%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22600%2C50%20605%2C65%20621%2C65%20608%2C74%20613%2C89%20600%2C80%20587%2C89%20592%2C74%20579%2C65%20595%2C65%22%20fill%3D%22%23E040FB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%21--%20Planetas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281400%2C750%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2230%22%20fill%3D%22%2380CBC4%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2255%22%20ry%3D%2215%22%20fill%3D%22none%22%20stroke%3D%22%2380DEEA%22%20stroke-width%3D%225%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%22-10%22%20r%3D%228%22%20fill%3D%22%23B2EBF2%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Nubes%20nocturnas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28900%2C820%29%20scale%280.9%29%22%20opacity%3D%220.35%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2250%22%20ry%3D%2228%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-30%22%20cy%3D%225%22%20rx%3D%2232%22%20ry%3D%2222%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2230%22%20cy%3D%225%22%20rx%3D%2232%22%20ry%3D%2222%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    #pagina-contacto {
+      background-color: #FFF3E0;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20L%C3%A1pices%20de%20colores%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C700%29%20rotate%28-30%2C0%2C0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%2290%22%20rx%3D%223%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-7%2C30%207%2C30%200%2C50%22%20fill%3D%22%23FFCA28%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-70%22%20width%3D%2214%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23FFAB91%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28120%2C700%29%20rotate%28-20%2C0%2C0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%2290%22%20rx%3D%223%22%20fill%3D%22%232196F3%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-7%2C30%207%2C30%200%2C50%22%20fill%3D%22%23BBDEFB%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-70%22%20width%3D%2214%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%2390CAF9%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23FFAB91%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28160%2C700%29%20rotate%28-10%2C0%2C0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%2290%22%20rx%3D%223%22%20fill%3D%22%234CAF50%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-7%2C30%207%2C30%200%2C50%22%20fill%3D%22%23DCEDC8%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-70%22%20width%3D%2214%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23A5D6A7%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23FFAB91%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Globos%20fiesta%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281320%2C100%29%22%20opacity%3D%220.55%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-5%2C48%205%2C48%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2248%22%20x2%3D%22-8%22%20y2%3D%22100%22%20stroke%3D%22%23FF8A80%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281370%2C150%29%20scale%280.85%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23FFD740%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-5%2C48%205%2C48%22%20fill%3D%22%23FFD740%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2248%22%20x2%3D%225%22%20y2%3D%22100%22%20stroke%3D%22%23FFE57F%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281290%2C180%29%20scale%280.75%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%2364FFDA%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-5%2C48%205%2C48%22%20fill%3D%22%2364FFDA%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2248%22%20x2%3D%220%22%20y2%3D%22100%22%20stroke%3D%22%23A7FFEB%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Confeti%20--%3E%0A%20%20%3Crect%20x%3D%22300%22%20y%3D%2250%22%20width%3D%2212%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23FF5252%22%20opacity%3D%220.6%22%20transform%3D%22rotate%2830%2C306%2C56%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22600%22%20y%3D%22100%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%23FFD740%22%20opacity%3D%220.55%22%20transform%3D%22rotate%28-20%2C605%2C105%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22900%22%20y%3D%2260%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%222%22%20fill%3D%22%2369F0AE%22%20opacity%3D%220.55%22%20transform%3D%22rotate%2845%2C907%2C67%29%22%2F%3E%0A%20%20%3Crect%20x%3D%221100%22%20y%3D%22120%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%2340C4FF%22%20opacity%3D%220.55%22%20transform%3D%22rotate%2815%2C1105%2C125%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22450%22%20y%3D%22800%22%20width%3D%2212%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23FF4081%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2860%2C456%2C806%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22800%22%20y%3D%22850%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%23FFAB40%22%20opacity%3D%220.5%22%20transform%3D%22rotate%28-35%2C805%2C855%29%22%2F%3E%0A%20%20%3Crect%20x%3D%221200%22%20y%3D%22780%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%222%22%20fill%3D%22%23E040FB%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2825%2C1207%2C787%29%22%2F%3E%0A%20%20%3C%21--%20Estrella%20grande%20--%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C830%20707%2C852%20730%2C852%20713%2C866%20719%2C888%20700%2C875%20681%2C888%20687%2C866%20670%2C852%20693%2C852%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3C%21--%20Lunares%20decorativos%20--%3E%0A%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22100%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22400%22%20r%3D%228%22%20fill%3D%22%2364B5F6%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221100%22%20cy%3D%22500%22%20r%3D%2212%22%20fill%3D%22%23A5D6A7%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22350%22%20cy%3D%22700%22%20r%3D%229%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.5%22%2F%3E%0A%3C%2Fsvg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .section-inner,
+    #hero .hero-layout,
+    #hero .hero-text,
+    #hero .hero-eyebrow,
+    #hero .hero-title,
+    #hero .hero-desc,
+    #hero .hero-ctas,
+    #hero .hero-info-cards {
+      position: relative;
+      z-index: 2;
+    }
+
+
+/* ── SECTIONS (from index.html) ── */
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding-bottom: 1rem;
+    }
+
+    .section-tag {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── MASSIVE TITLE (Guayamurí style) ── */
+    .section-title {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    .section-lead {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 640px;
+      font-weight: 400;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 8% 4rem;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      max-width: 900px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-desc {
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--dark);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 0;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 2px solid var(--dark);
+      color: var(--dark);
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /* Hero two-column layout */
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4rem;
+      width: 100%;
+    }
+
+    .hero-text {
+      max-width: 800px;
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-shield {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .hero-card {
+      width: 280px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.07);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      color: var(--blue);
+    }
+
+    .hero-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--blue);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.63rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Hero info cards */
+    .hero-info-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      max-width: 700px;
+    }
+
+    .hic {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      background: #fff;
+      padding: 1.1rem 1.25rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .hic-icon {
+      font-size: 1.3rem;
+    }
+
+    .hic strong {
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .hic span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      margin-top: 2.5rem;
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 2rem;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -2.9rem;
+      top: 0.2rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--yellow);
+      border: 2px solid var(--dark);
+      box-shadow: 0 0 0 3px rgba(255, 208, 67, 0.30);
+    }
+
+    .tl-year {
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      color: var(--yellow);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    .tl-text {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    /* ── MVV (white bg) ── */
+    #mvv {
+      background: var(--pg-mvv);
+    }
+
+    .mvv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+    }
+
+    .mvv-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      position: relative;
+      background: rgba(255, 255, 255, 0.75);
+      transition: background 0.25s, box-shadow 0.25s;
+    }
+
+    .mvv-card:hover {
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .mvv-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .mvv-card.mision::after {
+      background: var(--blue);
+    }
+
+    .mvv-card.vision::after {
+      background: var(--forest);
+    }
+
+    .mvv-card.valores::after {
+      background: var(--yellow);
+    }
+
+    .mvv-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .mvv-card h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .mvv-card p {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .values-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.9rem;
+      background: rgba(27, 58, 143, 0.08);
+      color: var(--blue-mid);
+      border: 1px solid rgba(27, 58, 143, 0.15);
+      text-transform: uppercase;
+    }
+
+    /* Historia — dark red text on pink bg */
+    #pagina-historia .section-title,
+    #pagina-historia h2,
+    #pagina-historia .tl-text {
+      color: #880E4F !important;
+    }
+
+    #pagina-historia .section-tag {
+      color: #C2185B !important;
+    }
+
+    #pagina-historia .section-lead {
+      color: rgba(136, 14, 79, 0.75) !important;
+    }
+
+    #pagina-historia .tl-year {
+      color: #C2185B !important;
+    }
+
+    #pagina-historia .timeline::before {
+      background: rgba(194, 24, 91, 0.25) !important;
+    }
+
+    #pagina-historia .tl-dot {
+      background: #E91E63 !important;
+      border-color: #FCE4EC !important;
+      box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.25) !important;
+    }
+
+    /* Feriados — dark green text on green bg */
+    #pagina-feriados .section-title,
+    #pagina-feriados h2 {
+      color: #1B5E20 !important;
+    }
+
+    #pagina-feriados .section-tag {
+      color: #2E7D32 !important;
+    }
+
+    #pagina-feriados .section-lead {
+      color: rgba(27, 94, 32, 0.8) !important;
+    }
+
+    #pagina-feriados .feriado-card {
+      background: rgba(255, 255, 255, 0.72) !important;
+      border-color: rgba(165, 214, 167, 0.6) !important;
+    }
+
+    #pagina-feriados .feriado-nombre {
+      color: #1B5E20 !important;
+    }
+
+    #pagina-feriados .feriado-fecha {
+      color: rgba(27, 94, 32, 0.6) !important;
+    }
+
+    #pagina-feriados .feriado-desc {
+      color: rgba(27, 94, 32, 0.8) !important;
+    }
+
+    #pagina-feriados .feriado-card.fijo .feriado-tipo {
+      background: rgba(27, 94, 32, 0.12) !important;
+      color: #1B5E20 !important;
+    }
+
+    #pagina-feriados .feriado-card.movible .feriado-tipo {
+      background: rgba(0, 0, 0, 0.08) !important;
+      color: #333 !important;
+    }
+
+    /* Galería — purple text on lilac bg */
+    #pagina-galeria .section-tag {
+      color: #6A1B9A !important;
+    }
+
+    #pagina-galeria .section-title {
+      color: #1A1A1A !important;
+    }
+
+    #pagina-galeria .section-lead {
+      color: rgba(74, 28, 122, 0.7) !important;
+    }
+
+    #pagina-galeria .dot {
+      background: rgba(106, 27, 154, 0.2) !important;
+    }
+
+    #pagina-galeria .dot.active {
+      background: #7B1FA2 !important;
+    }
+
+    #pagina-galeria .upload-hint {
+      color: rgba(74, 28, 122, 0.4) !important;
+    }
+
+    #pagina-galeria .carousel-btn {
+      background: rgba(255, 255, 255, 0.75) !important;
+      color: #4A1C7A !important;
+      border-color: rgba(74, 28, 122, 0.2) !important;
+    }
+
+    /* Contacto — orange text on warm bg */
+    #pagina-contacto .section-tag {
+      color: #BF360C !important;
+    }
+
+    #pagina-contacto .section-title {
+      color: #1A1A1A !important;
+    }
+
+    #pagina-contacto .section-lead {
+      color: rgba(0, 0, 0, 0.6) !important;
+    }
+
+    #pagina-contacto .contact-detail strong {
+      color: rgba(0, 0, 0, 0.45) !important;
+    }
+
+    #pagina-contacto .contact-detail span,
+    #pagina-contacto .contact-detail a {
+      color: #1A1A1A !important;
+    }
+
+    #pagina-contacto .contact-ico {
+      background: rgba(255, 255, 255, 0.65) !important;
+    }
+
+    #pagina-contacto .contact-map {
+      background: rgba(255, 255, 255, 0.55) !important;
+      border-color: rgba(255, 112, 67, 0.3) !important;
+      color: #1A1A1A !important;
+    }
+
+    #pagina-contacto .contact-map p {
+      color: rgba(0, 0, 0, 0.65) !important;
+    }
+
+    .libro-indicador {
+      background: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .libro-punto.active {
+      background: #FF6B9D !important;
+    }
+
+    nav {
+      border-bottom: 3px solid #FFD54F !important;
+    }
+
+    .ceim-footer {
+      background: #2d2d2d !important;
+    }
+
+    /* cards semi-transparentes para que se vean los dibujos */
+    .hero-card,
+    .mvv-card {
+      background: rgba(255, 255, 255, 0.82) !important;
+      backdrop-filter: blur(6px);
+    }
+
+    .hic {
+      background: rgba(255, 255, 255, 0.88) !important;
+    }
