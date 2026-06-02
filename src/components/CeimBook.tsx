@@ -484,6 +484,8 @@ export function CeimBook() {
       <button
         className="ceim-navBtn ceim-prev"
         onClick={() => goTo(current - 1)}
+        onTouchStart={(e) => e.stopPropagation()}
+        onTouchEnd={(e) => e.stopPropagation()}
         disabled={!canPrev}
         aria-label="Página anterior"
       >
@@ -492,6 +494,8 @@ export function CeimBook() {
       <button
         className="ceim-navBtn ceim-next"
         onClick={() => goTo(current + 1)}
+        onTouchStart={(e) => e.stopPropagation()}
+        onTouchEnd={(e) => e.stopPropagation()}
         disabled={!canNext}
         aria-label="Página siguiente"
       >

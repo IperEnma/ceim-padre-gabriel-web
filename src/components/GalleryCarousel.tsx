@@ -75,10 +75,28 @@ export function GalleryCarousel() {
             </div>
           ))}
         </div>
-        <button className="carousel-btn prev" onClick={prev} aria-label="Anterior">
+        <button
+          className="carousel-btn prev"
+          onClick={(e) => {
+            e.stopPropagation();
+            prev();
+          }}
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
+          aria-label="Anterior"
+        >
           ←
         </button>
-        <button className="carousel-btn next" onClick={next} aria-label="Siguiente">
+        <button
+          className="carousel-btn next"
+          onClick={(e) => {
+            e.stopPropagation();
+            next();
+          }}
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
+          aria-label="Siguiente"
+        >
           →
         </button>
       </div>
@@ -89,10 +107,13 @@ export function GalleryCarousel() {
             key={i}
             className={`dot ${i === cur ? "active" : ""}`}
             aria-label={`Ir a slide ${i + 1}`}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               goTo(i);
               start();
             }}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
           />
         ))}
       </div>
