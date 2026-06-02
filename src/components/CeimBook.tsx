@@ -20,6 +20,7 @@ const pages: Array<{ key: PageKey; label: string }> = [
 export function CeimBook() {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
   const startX = useRef<number | null>(null);
 
   const total = pages.length;
@@ -54,6 +55,39 @@ export function CeimBook() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [canNext, canPrev, current]);
+
+  function dismissSwipeHint() {
+    setShowSwipeHint(false);
+    try {
+      sessionStorage.setItem("ceim-swipe-hint-seen", "1");
+    } catch {
+      /* ignore storage errors */
+    }
+  }
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    let hideTimer: number | undefined;
+
+    function maybeShowHint() {
+      if (!mq.matches) return;
+      try {
+        if (sessionStorage.getItem("ceim-swipe-hint-seen")) return;
+      } catch {
+        /* ignore storage errors */
+      }
+      setShowSwipeHint(true);
+      hideTimer = window.setTimeout(dismissSwipeHint, 4200);
+    }
+
+    maybeShowHint();
+    mq.addEventListener("change", maybeShowHint);
+
+    return () => {
+      mq.removeEventListener("change", maybeShowHint);
+      if (hideTimer) window.clearTimeout(hideTimer);
+    };
+  }, []);
 
   return (
     <div className="ceim-body">
@@ -104,6 +138,7 @@ export function CeimBook() {
           className="ceim-pages"
           style={{ transform }}
           onTouchStart={(e) => {
+            if (showSwipeHint) dismissSwipeHint();
             startX.current = e.changedTouches[0]?.screenX ?? null;
           }}
           onTouchEnd={(e) => {
@@ -487,6 +522,19 @@ export function CeimBook() {
         </div>
         <small>© 2026 · Todos los derechos reservados · Porlamar, Nueva Esparta</small>
       </footer>
+
+      {showSwipeHint ? (
+        <div className="ceim-swipe-hint" role="status" aria-live="polite">
+          <div className="ceim-swipe-hint-gesture" aria-hidden="true">
+            <span className="ceim-swipe-hint-arrow ceim-swipe-hint-arrow-left">‹</span>
+            <span className="ceim-swipe-hint-track">
+              <span className="ceim-swipe-hint-finger" />
+            </span>
+            <span className="ceim-swipe-hint-arrow ceim-swipe-hint-arrow-right">›</span>
+          </div>
+          <p className="ceim-swipe-hint-text">Desliza hacia los lados para explorar</p>
+        </div>
+      ) : null}
     </div>
   );
 }

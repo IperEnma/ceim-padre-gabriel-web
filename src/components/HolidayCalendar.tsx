@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type HolidayType = "fijo" | "movible" | "patrio" | "religioso";
@@ -157,35 +157,30 @@ export function HolidayCalendar() {
   );
   const [year, setYear] = useState(CALENDAR_YEAR);
   const [mounted, setMounted] = useState(false);
+  const [isTouchUi, setIsTouchUi] = useState(false);
+  const [activeDay, setActiveDay] = useState<number | null>(null);
 
   const [tooltip, setTooltip] = useState<{
     active: boolean;
+    mobile: boolean;
     x: number;
     y: number;
     html: string;
-  }>({ active: false, x: 0, y: 0, html: "" });
+  }>({ active: false, mobile: false, x: 0, y: 0, html: "" });
 
   const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const lastPointer = useRef({ x: 0, y: 0 });
 
   const empty = useMemo(() => firstDayAdjusted(year, month), [year, month]);
   const total = useMemo(() => daysInMonth(year, month), [year, month]);
   const feriadosMes = feriados2026[month] || {};
 
-  function clampTooltipPosition(clientX: number, clientY: number) {
-    const w = tooltipRef.current?.offsetWidth ?? 280;
-    const h = tooltipRef.current?.offsetHeight ?? 130;
-
-    let x = clientX + 15;
-    let y = clientY + 15;
-
-    if (x + w > window.innerWidth) x = clientX - w - 15;
-    if (y + h > window.innerHeight) y = clientY - h - 15;
-    return { x, y };
-  }
-
-  function show(e: React.MouseEvent, holiday: Holiday, day: number) {
-    const { x, y } = clampTooltipPosition(e.clientX, e.clientY);
-    const html = `
+  function buildTooltipHtml(holiday: Holiday, day: number, withClose = false) {
+    const closeBtn = withClose
+      ? `<button type="button" class="tooltip-close" aria-label="Cerrar detalle">×</button>`
+      : "";
+    return `
+      ${closeBtn}
       <div class="tooltip-header">
         <div class="tooltip-icon">${holiday.icon}</div>
         <div class="tooltip-title-box">
@@ -198,17 +193,74 @@ export function HolidayCalendar() {
       </div>
       <div class="tooltip-desc">${holiday.desc}</div>
     `;
-    setTooltip({ active: true, x, y, html });
+  }
+
+  function clampTooltipPosition(clientX: number, clientY: number) {
+    const pad = 12;
+    const topInset = 76;
+    const bottomInset = 92;
+    const w = tooltipRef.current?.offsetWidth ?? 280;
+    const h = tooltipRef.current?.offsetHeight ?? 130;
+
+    let x = clientX + 15;
+    let y = clientY + 15;
+
+    if (x + w > window.innerWidth - pad) x = clientX - w - 15;
+    if (y + h > window.innerHeight - bottomInset) y = clientY - h - 15;
+
+    x = Math.max(pad, Math.min(x, window.innerWidth - w - pad));
+    y = Math.max(topInset, Math.min(y, window.innerHeight - h - bottomInset));
+
+    return { x, y };
+  }
+
+  function showDesktop(e: React.MouseEvent, holiday: Holiday, day: number) {
+    lastPointer.current = { x: e.clientX, y: e.clientY };
+    const { x, y } = clampTooltipPosition(e.clientX, e.clientY);
+    setActiveDay(day);
+    setTooltip({
+      active: true,
+      mobile: false,
+      x,
+      y,
+      html: buildTooltipHtml(holiday, day),
+    });
+  }
+
+  function showMobile(holiday: Holiday, day: number) {
+    setActiveDay(day);
+    setTooltip({
+      active: true,
+      mobile: true,
+      x: 0,
+      y: 0,
+      html: buildTooltipHtml(holiday, day, true),
+    });
+  }
+
+  function toggleMobile(holiday: Holiday, day: number) {
+    if (tooltip.active && tooltip.mobile && activeDay === day) {
+      hide();
+      return;
+    }
+    showMobile(holiday, day);
+  }
+
+  function show(e: React.MouseEvent, holiday: Holiday, day: number) {
+    if (isTouchUi) return;
+    showDesktop(e, holiday, day);
   }
 
   function move(e: React.MouseEvent) {
-    if (!tooltip.active) return;
+    if (!tooltip.active || tooltip.mobile) return;
+    lastPointer.current = { x: e.clientX, y: e.clientY };
     const { x, y } = clampTooltipPosition(e.clientX, e.clientY);
     setTooltip((t) => ({ ...t, x, y }));
   }
 
   function hide() {
-    setTooltip((t) => ({ ...t, active: false }));
+    setActiveDay(null);
+    setTooltip((t) => ({ ...t, active: false, mobile: false }));
   }
 
   function changeMonth(delta: number) {
@@ -237,17 +289,51 @@ export function HolidayCalendar() {
     hide();
   }
 
-  // Hide tooltip on scroll/resize
+  // Mount, detect mobile layout, dismiss desktop tooltip on scroll/resize
   useEffect(() => {
     setMounted(true);
-    const on = () => hide();
-    window.addEventListener("scroll", on, { passive: true });
-    window.addEventListener("resize", on);
+
+    const touchMq = window.matchMedia("(max-width: 1024px), (pointer: coarse)");
+    const updateTouchUi = () => setIsTouchUi(touchMq.matches);
+    updateTouchUi();
+    touchMq.addEventListener("change", updateTouchUi);
+
+    const onScroll = () => {
+      setTooltip((t) => {
+        if (!t.active || t.mobile) return t;
+        return { ...t, active: false };
+      });
+      setActiveDay(null);
+    };
+    const onResize = () => hide();
+
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    window.addEventListener("resize", onResize);
+
     return () => {
-      window.removeEventListener("scroll", on);
-      window.removeEventListener("resize", on);
+      touchMq.removeEventListener("change", updateTouchUi);
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
+
+  useLayoutEffect(() => {
+    if (!tooltip.active || tooltip.mobile) return;
+    const { x, y } = clampTooltipPosition(lastPointer.current.x, lastPointer.current.y);
+    setTooltip((t) => ({ ...t, x, y }));
+  }, [tooltip.active, tooltip.mobile, tooltip.html]);
+
+  useEffect(() => {
+    if (!tooltip.active || !tooltip.mobile) return;
+
+    function onCloseClick(e: MouseEvent) {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest(".tooltip-close")) hide();
+    }
+
+    document.addEventListener("click", onCloseClick);
+    return () => document.removeEventListener("click", onCloseClick);
+  }, [tooltip.active, tooltip.mobile]);
 
   return (
     <>
@@ -309,6 +395,11 @@ export function HolidayCalendar() {
                 <div
                   key={day}
                   className={cls}
+                  onClick={(e) => {
+                    if (!holiday || !isTouchUi) return;
+                    e.stopPropagation();
+                    toggleMobile(holiday, day);
+                  }}
                   onMouseEnter={(e) => {
                     if (!holiday) return;
                     show(e, holiday, day);
@@ -318,7 +409,7 @@ export function HolidayCalendar() {
                     move(e);
                   }}
                   onMouseLeave={() => {
-                    if (!holiday) return;
+                    if (!holiday || isTouchUi) return;
                     hide();
                   }}
                 >
@@ -333,13 +424,29 @@ export function HolidayCalendar() {
 
       {mounted
         ? createPortal(
-            <div
-              ref={tooltipRef}
-              className={`holiday-tooltip ${tooltip.active ? "active" : ""}`}
-              style={{ left: tooltip.x, top: tooltip.y }}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: tooltip.html || " " }}
-            />,
+            <>
+              {tooltip.active && tooltip.mobile ? (
+                <button
+                  type="button"
+                  className="holiday-tooltip-backdrop"
+                  aria-label="Cerrar detalle del feriado"
+                  onClick={hide}
+                />
+              ) : null}
+              <div
+                ref={tooltipRef}
+                className={[
+                  "holiday-tooltip",
+                  tooltip.mobile ? "holiday-tooltip-sheet" : "",
+                  tooltip.active ? "active" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={tooltip.mobile ? undefined : { left: tooltip.x, top: tooltip.y }}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: tooltip.html || " " }}
+              />
+            </>,
             document.body,
           )
         : null}

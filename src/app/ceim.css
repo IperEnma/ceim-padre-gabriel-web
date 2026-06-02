@@ -234,6 +234,154 @@ html:has(.ceim-body) body {
   right: 2rem;
 }
 
+.ceim-swipe-hint {
+  position: fixed;
+  z-index: 101;
+  left: 50%;
+  bottom: calc(var(--ceim-chrome-bottom) + 2.25rem);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.15rem 0.95rem;
+  border-radius: 1.25rem;
+  background: rgba(45, 45, 45, 0.9);
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  animation: ceim-swipe-hint-out 4.2s ease forwards;
+}
+
+.ceim-swipe-hint-gesture {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.ceim-swipe-hint-arrow {
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.55);
+  animation-duration: 1.6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.ceim-swipe-hint-arrow-left {
+  animation-name: ceim-swipe-hint-arrow-left;
+  animation-delay: 0s;
+}
+
+.ceim-swipe-hint-arrow-right {
+  animation-name: ceim-swipe-hint-arrow-right;
+  animation-delay: 0.8s;
+}
+
+.ceim-swipe-hint-track {
+  position: relative;
+  width: 4.5rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+}
+
+.ceim-swipe-hint-finger {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transform: translate(-20%, -50%);
+  animation: ceim-swipe-hint-slide 1.6s ease-in-out infinite;
+}
+
+.ceim-swipe-hint-text {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@keyframes ceim-swipe-hint-slide {
+  0%,
+  100% {
+    left: 0;
+    transform: translate(-20%, -50%);
+  }
+  50% {
+    left: 100%;
+    transform: translate(-80%, -50%);
+  }
+}
+
+@keyframes ceim-swipe-hint-arrow-left {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-3px);
+  }
+}
+
+@keyframes ceim-swipe-hint-arrow-right {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+@keyframes ceim-swipe-hint-out {
+  0%,
+  78% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ceim-swipe-hint {
+    animation: ceim-swipe-hint-out-static 3.5s ease forwards;
+  }
+
+  .ceim-swipe-hint-finger,
+  .ceim-swipe-hint-arrow {
+    animation: none;
+  }
+
+  @keyframes ceim-swipe-hint-out-static {
+    0%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .ceim-nav {
     padding: 0.8rem 2rem;
@@ -248,6 +396,9 @@ html:has(.ceim-body) body {
   }
   .ceim-navLinks {
     display: none;
+  }
+  .ceim-navBtn {
+    display: none !important;
   }
   .ceim-section {
     padding: 5.5rem 4% 4rem;
@@ -504,7 +655,7 @@ html:has(.ceim-body) body {
 
 .holiday-tooltip {
   position: fixed;
-  z-index: 9999;
+  z-index: 10001;
   width: 280px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -519,6 +670,59 @@ html:has(.ceim-body) body {
 .holiday-tooltip.active {
   opacity: 1;
   transform: translateY(0);
+}
+.holiday-tooltip-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.holiday-tooltip-sheet {
+  left: 50% !important;
+  top: auto !important;
+  bottom: calc(var(--ceim-chrome-bottom) + 0.85rem + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%) translateY(12px);
+  width: min(calc(100vw - 1.5rem), 360px);
+  max-height: calc(
+    100dvh - var(--ceim-nav-h) - var(--ceim-chrome-bottom) - 2rem - env(safe-area-inset-bottom, 0px)
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  pointer-events: auto;
+  padding: 1rem 1.1rem 1.1rem;
+  box-sizing: border-box;
+}
+.holiday-tooltip-sheet.active {
+  transform: translateX(-50%) translateY(0);
+}
+.holiday-tooltip-sheet .tooltip-close {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 1.35rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+.holiday-tooltip-sheet .tooltip-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.holiday-tooltip-sheet .tooltip-header {
+  padding-right: 2rem;
 }
 .tooltip-header {
   display: flex;
