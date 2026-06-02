@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { CEIM_LOGO_SRC } from "@/lib/ceim-logo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,9 +17,9 @@ export const metadata: Metadata = {
   description:
     "Centro de Educación Inicial Municipal en Porlamar, Nueva Esparta. Historia, misión, visión, feriados, galería y contacto.",
   icons: {
-    icon: CEIM_LOGO_SRC,
-    shortcut: CEIM_LOGO_SRC,
-    apple: CEIM_LOGO_SRC,
+    icon: "/ceim-logo.png",
+    shortcut: "/ceim-logo.png",
+    apple: "/ceim-logo.png",
   },
 };
 
