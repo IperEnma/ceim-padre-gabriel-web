@@ -254,51 +254,39 @@ html:has(.ceim-body) body {
 }
 
 .ceim-swipe-hint-gesture {
+  position: relative;
+  width: 5.75rem;
+  height: 2.85rem;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  justify-content: center;
 }
 
-.ceim-swipe-hint-arrow {
-  font-size: 1.35rem;
-  font-weight: 900;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.55);
-  animation-duration: 1.6s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-.ceim-swipe-hint-arrow-left {
-  animation-name: ceim-swipe-hint-arrow-left;
-  animation-delay: 0s;
-}
-
-.ceim-swipe-hint-arrow-right {
-  animation-name: ceim-swipe-hint-arrow-right;
-  animation-delay: 0.8s;
-}
-
-.ceim-swipe-hint-track {
-  position: relative;
-  width: 4.5rem;
-  height: 0.35rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
-  overflow: hidden;
-}
-
-.ceim-swipe-hint-finger {
+.ceim-swipe-hint-gesture::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 1.15rem;
-  height: 1.15rem;
-  border-radius: 50%;
-  background: var(--yellow);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  transform: translate(-20%, -50%);
-  animation: ceim-swipe-hint-slide 1.6s ease-in-out infinite;
+  left: 12%;
+  right: 12%;
+  top: 58%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 18%,
+    rgba(255, 255, 255, 0.35) 82%,
+    transparent 100%
+  );
+}
+
+.ceim-swipe-hint-hand {
+  position: relative;
+  z-index: 1;
+  font-size: 2rem;
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
+  animation: ceim-swipe-hint-hand 1.75s ease-in-out infinite;
 }
 
 .ceim-swipe-hint-text {
@@ -311,39 +299,15 @@ html:has(.ceim-body) body {
   white-space: nowrap;
 }
 
-@keyframes ceim-swipe-hint-slide {
+@keyframes ceim-swipe-hint-hand {
   0%,
   100% {
-    left: 0;
-    transform: translate(-20%, -50%);
+    transform: translateX(-1.55rem) rotate(-14deg) scale(0.96);
+    opacity: 0.82;
   }
   50% {
-    left: 100%;
-    transform: translate(-80%, -50%);
-  }
-}
-
-@keyframes ceim-swipe-hint-arrow-left {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: translateX(0);
-  }
-  50% {
+    transform: translateX(1.55rem) rotate(14deg) scale(1);
     opacity: 1;
-    transform: translateX(-3px);
-  }
-}
-
-@keyframes ceim-swipe-hint-arrow-right {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: translateX(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(3px);
   }
 }
 
@@ -365,8 +329,7 @@ html:has(.ceim-body) body {
     animation: ceim-swipe-hint-out-static 3.5s ease forwards;
   }
 
-  .ceim-swipe-hint-finger,
-  .ceim-swipe-hint-arrow {
+  .ceim-swipe-hint-hand {
     animation: none;
   }
 

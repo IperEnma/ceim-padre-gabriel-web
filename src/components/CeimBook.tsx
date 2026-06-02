@@ -524,11 +524,7 @@ export function CeimBook() {
       {showSwipeHint ? (
         <div className="ceim-swipe-hint" role="status" aria-live="polite">
           <div className="ceim-swipe-hint-gesture" aria-hidden="true">
-            <span className="ceim-swipe-hint-arrow ceim-swipe-hint-arrow-left">‹</span>
-            <span className="ceim-swipe-hint-track">
-              <span className="ceim-swipe-hint-finger" />
-            </span>
-            <span className="ceim-swipe-hint-arrow ceim-swipe-hint-arrow-right">›</span>
+            <span className="ceim-swipe-hint-hand">👆</span>
           </div>
           <p className="ceim-swipe-hint-text">Desliza hacia los lados para explorar</p>
         </div>
