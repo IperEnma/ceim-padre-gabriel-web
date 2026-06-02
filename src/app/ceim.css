@@ -2230,11 +2230,11 @@ html:has(.ceim-body) body {
 #pagina-feriados {
   --ceim-nav-h: 5.5rem;
   --ceim-footer-h: 2.75rem;
-  --feriados-header-block: 11.5rem;
-  --feriados-art-bottom: 10rem;
+  --feriados-header-block: 9rem;
+  --feriados-art-bottom: 5.75rem;
   --feriados-calendar-max-h: calc(
     100dvh - var(--ceim-nav-h) - var(--ceim-chrome-bottom) - var(--feriados-header-block) -
-      var(--feriados-art-bottom) - 0.75rem
+      var(--feriados-art-bottom)
   );
   position: relative;
   isolation: isolate;
@@ -2287,8 +2287,8 @@ html:has(.ceim-body) body {
   height: 100%;
   max-height: 100%;
   box-sizing: border-box;
-  padding: calc(var(--ceim-nav-h) + 0.35rem) clamp(1.5rem, 4vw, 3.5rem)
-    calc(var(--ceim-chrome-bottom) + 0.35rem);
+  padding: calc(var(--ceim-nav-h) + 0.2rem) clamp(1.5rem, 4vw, 3.5rem)
+    calc(var(--ceim-chrome-bottom) + 0.15rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2310,19 +2310,19 @@ html:has(.ceim-body) body {
 }
 
 #pagina-feriados .section-tag {
-  margin-bottom: clamp(0.5rem, 1vh, 0.85rem);
+  margin-bottom: clamp(0.35rem, 0.8vh, 0.65rem);
   flex-shrink: 0;
 }
 
 #pagina-feriados .section-title {
-  margin-bottom: clamp(0.5rem, 1vh, 1rem);
+  margin-bottom: clamp(0.35rem, 0.8vh, 0.75rem);
   flex-shrink: 0;
   font-size: clamp(1.65rem, 3.8vw, 3.25rem);
   line-height: var(--ceim-heading-lh);
 }
 
 #pagina-feriados .section-lead {
-  margin-bottom: clamp(0.75rem, 1.5vh, 1.25rem);
+  margin-bottom: clamp(0.35rem, 0.8vh, 0.65rem);
   flex-shrink: 0;
   max-width: 100%;
   font-size: clamp(0.88rem, 1.5vw, var(--ceim-text-size));
@@ -2330,7 +2330,7 @@ html:has(.ceim-body) body {
 }
 
 #pagina-feriados .calendar-dashboard {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-height: 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -2341,14 +2341,14 @@ html:has(.ceim-body) body {
 }
 
 #pagina-feriados .calendar-card {
-  flex: 0 1 auto;
-  min-height: 0;
+  flex: 1 1 auto;
+  min-height: min(var(--feriados-calendar-max-h), 100%);
   max-height: min(var(--feriados-calendar-max-h), 100%);
   width: 100%;
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  padding: clamp(1rem, 2vh, 1.75rem);
+  padding: clamp(0.85rem, 1.6vh, 1.45rem);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.68);
   backdrop-filter: blur(6px);
@@ -2404,8 +2404,8 @@ html:has(.ceim-body) body {
 
 @media (max-height: 820px) {
   #pagina-feriados {
-    --feriados-header-block: 9.5rem;
-    --feriados-art-bottom: 7.5rem;
+    --feriados-header-block: 7.75rem;
+    --feriados-art-bottom: 5rem;
   }
 
   #pagina-feriados .section-title {
