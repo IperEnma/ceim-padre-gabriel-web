@@ -119,10 +119,7 @@ export function CeimBook() {
           }}
         >
           <div className="ceim-page" id="pagina-inicio">
-            <section
-              id="hero"
-              style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
-            >
+            <section id="hero" className="hero-screen">
               <div className="hero-layout">
                 <div className="hero-text">
                   <span className="hero-eyebrow">Porlamar · Nueva Esparta · Desde 1949</span>
@@ -172,14 +169,15 @@ export function CeimBook() {
 
                 <div className="hero-visual">
                   <div className="hero-logo-display">
-                    <img
-                      className="hero-shield"
-                      src={CEIM_LOGO_SRC}
-                      alt="Escudo C.E.I.M."
-                      width={240}
-                      height={240}
-                      style={{ width: 240, height: 240, objectFit: "contain" }}
-                    />
+                    <div className="hero-shield-float">
+                      <img
+                        className="hero-shield"
+                        src={CEIM_LOGO_SRC}
+                        alt="Escudo C.E.I.M."
+                        width={200}
+                        height={200}
+                      />
+                    </div>
                     <div className="hero-card">
                       <div className="card-icon">🌟</div>
                       <h3>Centro de Educación Inicial Municipal</h3>
@@ -209,7 +207,7 @@ export function CeimBook() {
           </div>
 
           <div className="ceim-page" id="pagina-historia">
-            <section className="ceim-section" id="historia">
+            <section className="ceim-section historia-screen" id="historia">
               <div className="section-inner">
                 <span className="section-tag">Reseña Histórica</span>
                 <h2 className="section-title">
@@ -295,7 +293,7 @@ export function CeimBook() {
           </div>
 
           <div className="ceim-page" id="pagina-mvv">
-            <section className="ceim-section" id="mvv">
+            <section className="ceim-section mvv-screen" id="mvv">
               <div className="section-inner">
                 <span className="section-tag">Identidad Institucional</span>
                 <h2 className="section-title">
@@ -345,7 +343,7 @@ export function CeimBook() {
           </div>
 
           <div className="ceim-page" id="pagina-feriados">
-            <section className="ceim-section" id="feriados">
+            <section className="ceim-section feriados-screen" id="feriados">
               <div className="section-inner">
                 <span className="section-tag">Calendario Escolar</span>
                 <h2 className="section-title">
@@ -364,7 +362,7 @@ export function CeimBook() {
           </div>
 
           <div className="ceim-page" id="pagina-galeria">
-            <section className="ceim-section ceim-galeria" id="galeria">
+            <section className="ceim-section ceim-galeria galeria-screen" id="galeria">
               <div className="section-inner">
                 <span className="section-tag">Galería</span>
                 <h2 className="section-title">Nuestra institución</h2>
@@ -377,7 +375,7 @@ export function CeimBook() {
           </div>
 
           <div className="ceim-page" id="pagina-contacto">
-            <section className="ceim-section" id="contacto">
+            <section className="ceim-section contacto-screen" id="contacto">
               <div className="section-inner">
                 <span className="section-tag">Contáctanos</span>
                 <h2 className="section-title">

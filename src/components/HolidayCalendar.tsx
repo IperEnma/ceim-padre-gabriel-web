@@ -139,9 +139,23 @@ function daysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
 
+const CALENDAR_YEAR = 2026;
+
+function readToday() {
+  const now = new Date();
+  return {
+    year: now.getFullYear(),
+    month: now.getMonth(),
+    day: now.getDate(),
+  };
+}
+
 export function HolidayCalendar() {
-  const [month, setMonth] = useState(4); // Mayo
-  const [year, setYear] = useState(2026);
+  const today = useMemo(() => readToday(), []);
+  const [month, setMonth] = useState(() =>
+    today.year === CALENDAR_YEAR ? today.month : new Date().getMonth(),
+  );
+  const [year, setYear] = useState(CALENDAR_YEAR);
   const [mounted, setMounted] = useState(false);
 
   const [tooltip, setTooltip] = useState<{
@@ -152,7 +166,6 @@ export function HolidayCalendar() {
   }>({ active: false, x: 0, y: 0, html: "" });
 
   const tooltipRef = useRef<HTMLDivElement | null>(null);
-  const today = { year: 2026, month: 4, day: 25 };
 
   const empty = useMemo(() => firstDayAdjusted(year, month), [year, month]);
   const total = useMemo(() => daysInMonth(year, month), [year, month]);
@@ -209,13 +222,12 @@ export function HolidayCalendar() {
       y += 1;
     }
 
-    // limitar a 2026 como el HTML
-    if (y !== 2026) {
-      if (y < 2026) {
-        y = 2026;
+    if (y !== CALENDAR_YEAR) {
+      if (y < CALENDAR_YEAR) {
+        y = CALENDAR_YEAR;
         m = 0;
       } else {
-        y = 2026;
+        y = CALENDAR_YEAR;
         m = 11;
       }
     }
@@ -280,7 +292,10 @@ export function HolidayCalendar() {
               const day = idx + 1;
               const holiday = feriadosMes[day];
               const isToday =
-                year === today.year && month === today.month && day === today.day;
+                year === CALENDAR_YEAR &&
+                today.year === CALENDAR_YEAR &&
+                month === today.month &&
+                day === today.day;
 
               const cls = [
                 "day-cell",

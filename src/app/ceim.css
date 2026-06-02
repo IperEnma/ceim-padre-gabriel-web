@@ -22,6 +22,31 @@
   --yellow: #ffd043;
   --yellow-deep: #f5b014;
   --forest: #2d6a4f;
+
+  /* Tipografía (escala de Inicio) */
+  --ceim-eyebrow-size: 0.65rem;
+  --ceim-eyebrow-spacing: 0.22em;
+  --ceim-heading-size: clamp(2.2rem, 5.5vw, 5rem);
+  --ceim-heading-lh: 0.95;
+  --ceim-heading-spacing: -0.03em;
+  --ceim-text-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  --ceim-text-lh: 1.8;
+  --ceim-card-title-size: 1rem;
+  --ceim-label-size: 0.6rem;
+  --ceim-small-size: 0.78rem;
+
+  /* Barras fijas (nav + pie + indicador de páginas) */
+  --ceim-nav-h: 5.5rem;
+  --ceim-footer-h: 2.75rem;
+  --ceim-dots-h: 2rem;
+  --ceim-chrome-bottom: calc(var(--ceim-footer-h) + var(--ceim-dots-h));
+}
+
+html:has(.ceim-body),
+html:has(.ceim-body) body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
 .ceim-body {
@@ -29,9 +54,10 @@
     Arial, sans-serif;
   background: var(--off-white);
   color: var(--ink);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
 }
 
 .ceim-nav {
@@ -70,12 +96,16 @@
 .ceim-book {
   width: 100%;
   max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
   overflow: hidden;
   position: relative;
 }
 
 .ceim-pages {
   display: flex;
+  align-items: stretch;
+  height: 100%;
   transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
   will-change: transform;
   width: 100%;
@@ -85,12 +115,19 @@
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;
+  height: 100%;
+  max-height: 100dvh;
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   flex-shrink: 0;
-  padding-bottom: 64px;
+  box-sizing: border-box;
+  padding-bottom: 3.25rem;
+}
+
+.ceim-page:not(#pagina-inicio) {
+  align-self: stretch;
 }
 
 .ceim-section {
@@ -113,19 +150,19 @@
 }
 
 .ceim-title {
-  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-size: var(--ceim-heading-size);
   font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  line-height: var(--ceim-heading-lh);
+  letter-spacing: var(--ceim-heading-spacing);
   margin-bottom: 2rem;
   color: var(--ink);
 }
 
 .ceim-lead {
-  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-  line-height: 1.85;
+  font-size: var(--ceim-text-size);
+  line-height: var(--ceim-text-lh);
   color: var(--muted);
-  max-width: 640px;
+  max-width: 520px;
   font-weight: 400;
 }
 
@@ -371,7 +408,7 @@
   margin-bottom: 1.5rem;
 }
 .calendar-header h3 {
-  font-size: 1.5rem;
+  font-size: var(--ceim-card-title-size);
   font-weight: 800;
   color: #1a3a8f;
   text-transform: capitalize;
@@ -595,19 +632,19 @@
 
     .hero-eyebrow {
       display: inline-block;
-      font-size: 0.65rem;
+      font-size: var(--ceim-eyebrow-size);
       font-weight: 900;
-      letter-spacing: 0.22em;
+      letter-spacing: var(--ceim-eyebrow-spacing);
       text-transform: uppercase;
       color: var(--blue-mid);
       margin-bottom: 2rem;
     }
 
     .hero-title {
-      font-size: clamp(2.2rem, 5.5vw, 5rem);
+      font-size: var(--ceim-heading-size);
       font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
+      line-height: var(--ceim-heading-lh);
+      letter-spacing: var(--ceim-heading-spacing);
       color: var(--ink);
       margin-bottom: 2rem;
       max-width: 900px;
@@ -619,8 +656,8 @@
     }
 
     .hero-desc {
-      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
-      line-height: 1.8;
+      font-size: var(--ceim-text-size);
+      line-height: var(--ceim-text-lh);
       color: var(--muted);
       max-width: 520px;
       margin-bottom: 2.5rem;
@@ -977,12 +1014,10 @@
         padding: 6rem 4% 3rem;
       }
 
-      .hero-title {
-        font-size: clamp(2.8rem, 10vw, 5rem);
-      }
-
-      .section-title {
-        font-size: clamp(2.4rem, 9vw, 4.5rem);
+      .hero-title,
+      .section-title,
+      .ceim-title {
+        font-size: clamp(2.2rem, 10vw, 5rem);
       }
 
       .mvv-grid {
@@ -1012,12 +1047,10 @@
     }
 
     @media (max-width: 480px) {
-      .hero-title {
-        font-size: clamp(2.4rem, 11vw, 3.5rem);
-      }
-
-      .section-title {
-        font-size: clamp(2rem, 10vw, 3.5rem);
+      .hero-title,
+      .section-title,
+      .ceim-title {
+        font-size: clamp(2rem, 11vw, 3.5rem);
       }
 
       .hero-info-cards {
@@ -1046,44 +1079,38 @@
 
     #pagina-inicio {
       background-color: #FFFDE7;
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Soles%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C80%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-52%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2252%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-52%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2252%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-37%22%20y2%3D%22-37%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2237%22%20y2%3D%22-37%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-37%22%20y2%3D%2237%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2237%22%20y2%3D%2237%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281340%2C120%29%20scale%280.65%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFCA28%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-52%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2252%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-52%22%20y2%3D%220%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2252%22%20y2%3D%220%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-37%22%20y2%3D%22-37%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2237%22%20y2%3D%22-37%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-37%22%20y2%3D%2237%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2237%22%20y2%3D%2237%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Nubes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C60%29%22%20opacity%3D%220.8%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28900%2C40%29%20scale%280.8%29%22%20opacity%3D%220.7%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281200%2C700%29%20scale%280.7%29%22%20opacity%3D%220.6%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20--%3E%0A%20%20%3Cpolygon%20points%3D%221380%2C700%201387%2C720%201408%2C720%201392%2C733%201398%2C753%201380%2C741%201362%2C753%201368%2C733%201352%2C720%201373%2C720%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%2260%2C750%2065%2C765%2081%2C765%2069%2C774%2074%2C789%2060%2C780%2046%2C789%2051%2C774%2039%2C765%2055%2C765%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C820%20704%2C832%20717%2C832%20707%2C840%20711%2C852%20700%2C845%20689%2C852%20693%2C840%20683%2C832%20696%2C832%22%20fill%3D%22%23FFC107%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%21--%20Mariposas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C200%29%22%20opacity%3D%220.6%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FF80AB%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FF80AB%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23F48FB1%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23F48FB1%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%234A148C%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28200%2C600%29%20scale%280.8%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%2380DEEA%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%2380DEEA%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%234DD0E1%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%234DD0E1%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%23006064%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Flores%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28550%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-22%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2221%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2213%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-13%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-21%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2213%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281300%2C820%29%20scale%280.8%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-22%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2221%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2213%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-13%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-21%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2213%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Pelota%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281400%2C500%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2230%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-30%2C0%20Q0%2C-30%2030%2C0%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-30%2C0%20Q0%2C30%2030%2C0%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-30%20Q20%2C0%200%2C30%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-30%20Q-20%2C0%200%2C30%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
-      background-size: cover;
-      background-position: center;
+      --ceim-inicio-art: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C!--%20Soles%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C80%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-52%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2252%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-52%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2252%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-37%22%20y2%3D%22-37%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2237%22%20y2%3D%22-37%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-37%22%20y2%3D%2237%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2237%22%20y2%3D%2237%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281340%2C120%29%20scale%280.65%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFCA28%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-52%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2252%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-52%22%20y2%3D%220%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2252%22%20y2%3D%220%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-37%22%20y2%3D%22-37%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2237%22%20y2%3D%22-37%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-37%22%20y2%3D%2237%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2237%22%20y2%3D%2237%22%20stroke%3D%22%23FFCA28%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C!--%20Nubes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C60%29%22%20opacity%3D%220.8%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28900%2C40%29%20scale%280.8%29%22%20opacity%3D%220.7%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281200%2C700%29%20scale%280.7%29%22%20opacity%3D%220.6%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2235%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-35%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2235%22%20cy%3D%225%22%20rx%3D%2238%22%20ry%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2255%22%20ry%3D%2230%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C!--%20Estrellas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22870%2C381%20877%2C401%20898%2C401%20882%2C414%20888%2C434%20870%2C422%20852%2C434%20858%2C414%20842%2C401%20863%2C401%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%2260%2C750%2065%2C765%2081%2C765%2069%2C774%2074%2C789%2060%2C780%2046%2C789%2051%2C774%2039%2C765%2055%2C765%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C820%20704%2C832%20717%2C832%20707%2C840%20711%2C852%20700%2C845%20689%2C852%20693%2C840%20683%2C832%20696%2C832%22%20fill%3D%22%23FFC107%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C!--%20Mariposas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C200%29%22%20opacity%3D%220.6%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FF80AB%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FF80AB%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23F48FB1%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23F48FB1%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%234A148C%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28200%2C600%29%20scale%280.8%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%2380DEEA%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%2380DEEA%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%234DD0E1%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%234DD0E1%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%23006064%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C!--%20Flores%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28550%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-22%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2221%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2213%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-13%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-21%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2213%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281300%2C820%29%20scale%280.8%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-22%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2221%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2213%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-13%22%20cy%3D%2217%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-21%22%20cy%3D%22-7%22%20r%3D%2210%22%20fill%3D%22%23AED581%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2213%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C!--%20Pelota%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28895%2C80%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2230%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-30%2C0%20Q0%2C-30%2030%2C0%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-30%2C0%20Q0%2C30%2030%2C0%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-30%20Q20%2C0%200%2C30%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-30%20Q-20%2C0%200%2C30%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
     }
 
     #pagina-historia {
       background-color: #FCE4EC;
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Corazones%20grandes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C100%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281360%2C150%29%20scale%281.2%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23F48FB1%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28180%2C780%29%20scale%280.8%29%22%20opacity%3D%220.4%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C750%29%20scale%280.9%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23E91E63%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Arcoiris%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28700%2C100%29%22%20opacity%3D%220.35%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-200%2C80%20A200%2C200%200%200%2C1%20200%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FF5252%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-170%2C80%20A170%2C170%200%200%2C1%20170%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FF9800%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-142%2C80%20A142%2C142%200%200%2C1%20142%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FFEB3B%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-115%2C80%20A115%2C115%200%200%2C1%20115%2C80%22%20fill%3D%22none%22%20stroke%3D%22%234CAF50%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-88%2C80%20A88%2C88%200%200%2C1%2088%2C80%22%20fill%3D%22none%22%20stroke%3D%22%232196F3%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-62%2C80%20A62%2C62%200%200%2C1%2062%2C80%22%20fill%3D%22none%22%20stroke%3D%22%239C27B0%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22100%2C500%20106%2C518%20125%2C518%20111%2C529%20116%2C547%20100%2C537%2084%2C547%2089%2C529%2075%2C518%2094%2C518%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221350%2C600%201355%2C615%201371%2C615%201358%2C624%201363%2C639%201350%2C630%201337%2C639%201342%2C624%201329%2C615%201345%2C615%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22500%2C850%20504%2C862%20517%2C862%20507%2C870%20511%2C882%20500%2C875%20489%2C882%20493%2C870%20483%2C862%20496%2C862%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3C%21--%20Mariposas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C200%29%20scale%281.3%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23FFCA28%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23FFCA28%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%23E65100%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Lunares%20decorativos%20--%3E%0A%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%2250%22%20r%3D%2212%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22900%22%20cy%3D%22870%22%20r%3D%2216%22%20fill%3D%22%23F48FB1%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221250%22%20cy%3D%22400%22%20r%3D%2210%22%20fill%3D%22%23FF4081%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%22400%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.4%22%2F%3E%0A%3C%2Fsvg%3E");
-      background-size: cover;
-      background-position: center;
+      --ceim-historia-art: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Corazones%20grandes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C100%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281360%2C150%29%20scale%281.2%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23F48FB1%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28180%2C780%29%20scale%280.8%29%22%20opacity%3D%220.4%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C750%29%20scale%280.9%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C15%20C0%2C15%20-35%2C-5%20-35%2C-25%20C-35%2C-45%20-15%2C-50%200%2C-35%20C15%2C-50%2035%2C-45%2035%2C-25%20C35%2C-5%200%2C15%200%2C15Z%22%20fill%3D%22%23E91E63%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Arcoiris%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28700%2C100%29%22%20opacity%3D%220.35%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-200%2C80%20A200%2C200%200%200%2C1%20200%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FF5252%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-170%2C80%20A170%2C170%200%200%2C1%20170%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FF9800%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-142%2C80%20A142%2C142%200%200%2C1%20142%2C80%22%20fill%3D%22none%22%20stroke%3D%22%23FFEB3B%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-115%2C80%20A115%2C115%200%200%2C1%20115%2C80%22%20fill%3D%22none%22%20stroke%3D%22%234CAF50%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-88%2C80%20A88%2C88%200%200%2C1%2088%2C80%22%20fill%3D%22none%22%20stroke%3D%22%232196F3%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-62%2C80%20A62%2C62%200%200%2C1%2062%2C80%22%20fill%3D%22none%22%20stroke%3D%22%239C27B0%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22100%2C500%20106%2C518%20125%2C518%20111%2C529%20116%2C547%20100%2C537%2084%2C547%2089%2C529%2075%2C518%2094%2C518%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221350%2C600%201355%2C615%201371%2C615%201358%2C624%201363%2C639%201350%2C630%201337%2C639%201342%2C624%201329%2C615%201345%2C615%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22500%2C850%20504%2C862%20517%2C862%20507%2C870%20511%2C882%20500%2C875%20489%2C882%20493%2C870%20483%2C862%20496%2C862%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3C%21--%20Mariposas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C200%29%20scale%281.3%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20transform%3D%22rotate%28-30%2C-18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%22-10%22%20rx%3D%2218%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20transform%3D%22rotate%2830%2C18%2C-10%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-12%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23FFCA28%22%20transform%3D%22rotate%2820%2C-12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2212%22%20cy%3D%228%22%20rx%3D%2212%22%20ry%3D%228%22%20fill%3D%22%23FFCA28%22%20transform%3D%22rotate%28-20%2C12%2C8%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%2214%22%20fill%3D%22%23E65100%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Lunares%20decorativos%20--%3E%0A%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%2250%22%20r%3D%2212%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22900%22%20cy%3D%22870%22%20r%3D%2216%22%20fill%3D%22%23F48FB1%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221250%22%20cy%3D%22400%22%20r%3D%2210%22%20fill%3D%22%23FF4081%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%22400%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.4%22%2F%3E%0A%3C%2Fsvg%3E");
     }
 
     #pagina-mvv {
       background-color: #E3F2FD;
       background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Globos%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28100%2C200%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%2364B5F6%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-6%2C50%206%2C50%22%20fill%3D%22%2364B5F6%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2250%22%20x2%3D%225%22%20y2%3D%2290%22%20stroke%3D%22%2390CAF9%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281320%2C250%29%20scale%281.2%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-6%2C50%206%2C50%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2250%22%20x2%3D%22-5%22%20y2%3D%2290%22%20stroke%3D%22%23F48FB1%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28700%2C50%29%20scale%280.9%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23A5D6A7%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-6%2C50%206%2C50%22%20fill%3D%22%23A5D6A7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2250%22%20x2%3D%220%22%20y2%3D%2290%22%20stroke%3D%22%23C8E6C9%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Burbujas%20--%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22700%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22%2390CAF9%22%20stroke-width%3D%223%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22210%22%20cy%3D%22688%22%20r%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221300%22%20cy%3D%22650%22%20r%3D%2255%22%20fill%3D%22none%22%20stroke%3D%22%2381D4FA%22%20stroke-width%3D%223%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221312%22%20cy%3D%22636%22%20r%3D%2210%22%20fill%3D%22white%22%20opacity%3D%220.3%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22800%22%20r%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22%2364B5F6%22%20stroke-width%3D%223%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22900%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22none%22%20stroke%3D%22%23B3E5FC%22%20stroke-width%3D%223%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%21--%20Diamantes%20%2F%20rombos%20--%3E%0A%20%20%3Cpolygon%20points%3D%221380%2C400%201400%2C425%201380%2C450%201360%2C425%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%2260%2C600%2080%2C625%2060%2C650%2040%2C625%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C850%20720%2C875%20700%2C900%20680%2C875%22%20fill%3D%22%23FFCA28%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3C%21--%20Nubes%20peque%C3%B1as%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28400%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2245%22%20ry%3D%2225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-25%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2225%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281100%2C100%29%20scale%280.7%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2245%22%20ry%3D%2225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-25%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2225%22%20cy%3D%225%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22white%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
       background-size: cover;
-      background-position: center;
+      background-position: center center;
+      background-repeat: no-repeat;
     }
 
     #pagina-feriados {
       background-color: #F1F8E9;
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Flores%20grandes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C800%29%22%20opacity%3D%220.55%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-30%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-18%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-28%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2217%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2217%22%20x2%3D%220%22%20y2%3D%2270%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%2250%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%28-30%2C18%2C50%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%2260%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%2830%2C-18%2C60%29%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281350%2C750%29%20scale%281.1%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-30%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-18%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-28%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2217%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2217%22%20x2%3D%220%22%20y2%3D%2270%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%2250%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%28-30%2C18%2C50%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%2260%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%2830%2C-18%2C60%29%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Oruga%20%2F%20gusano%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28600%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2222%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2242%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FF7043%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2282%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FFA726%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22122%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FFEE58%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22162%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%2366BB6A%22%2F%3E%0A%20%20%20%20%3C%21--%20Cara%20--%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%223%22%20fill%3D%22%231A1A1A%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-8%2C5%20Q0%2C14%208%2C5%22%20fill%3D%22none%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-12%22%20y1%3D%22-22%22%20x2%3D%22-8%22%20y2%3D%22-32%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2212%22%20y1%3D%22-22%22%20x2%3D%228%22%20y2%3D%22-32%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-8%22%20cy%3D%22-33%22%20r%3D%223%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%228%22%20cy%3D%22-33%22%20r%3D%223%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Hojas%20volando%20--%3E%0A%20%20%3Cellipse%20cx%3D%22200%22%20cy%3D%22150%22%20rx%3D%2220%22%20ry%3D%2210%22%20fill%3D%22%2381C784%22%20opacity%3D%220.6%22%20transform%3D%22rotate%28-45%2C200%2C150%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%221250%22%20cy%3D%22200%22%20rx%3D%2220%22%20ry%3D%2210%22%20fill%3D%22%23AED581%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2830%2C1250%2C200%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%221100%22%20cy%3D%22800%22%20rx%3D%2216%22%20ry%3D%228%22%20fill%3D%22%2366BB6A%22%20opacity%3D%220.55%22%20transform%3D%22rotate%28-20%2C1100%2C800%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22300%22%20cy%3D%22650%22%20rx%3D%2218%22%20ry%3D%229%22%20fill%3D%22%23A5D6A7%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2850%2C300%2C650%29%22%2F%3E%0A%20%20%3C%21--%20Sol%20peque%C3%B1o%20esquina%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281380%2C80%29%20scale%280.7%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-55%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2255%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-55%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2255%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-39%22%20y2%3D%22-39%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2239%22%20y2%3D%22-39%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-39%22%20y2%3D%2239%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2239%22%20y2%3D%2239%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
-      background-size: cover;
-      background-position: center;
+      --ceim-feriados-art: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Flores%20grandes%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C800%29%22%20opacity%3D%220.55%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-30%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-18%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-28%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2217%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2217%22%20x2%3D%220%22%20y2%3D%2270%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%2250%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%28-30%2C18%2C50%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%2260%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%2830%2C-18%2C60%29%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281350%2C750%29%20scale%281.1%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-30%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-18%22%20cy%3D%2222%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-28%22%20cy%3D%22-10%22%20r%3D%2214%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2217%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2217%22%20x2%3D%220%22%20y2%3D%2270%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2218%22%20cy%3D%2250%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%28-30%2C18%2C50%29%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-18%22%20cy%3D%2260%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23A5D6A7%22%20transform%3D%22rotate%2830%2C-18%2C60%29%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Oruga%20%2F%20gusano%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28600%2C820%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2222%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2242%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FF7043%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2282%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FFA726%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22122%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%23FFEE58%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22162%22%20cy%3D%220%22%20r%3D%2220%22%20fill%3D%22%2366BB6A%22%2F%3E%0A%20%20%20%20%3C%21--%20Cara%20--%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%225%22%20fill%3D%22white%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%223%22%20fill%3D%22%231A1A1A%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-8%2C5%20Q0%2C14%208%2C5%22%20fill%3D%22none%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-12%22%20y1%3D%22-22%22%20x2%3D%22-8%22%20y2%3D%22-32%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2212%22%20y1%3D%22-22%22%20x2%3D%228%22%20y2%3D%22-32%22%20stroke%3D%22%231A1A1A%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22-8%22%20cy%3D%22-33%22%20r%3D%223%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%228%22%20cy%3D%22-33%22%20r%3D%223%22%20fill%3D%22%23FF4081%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Hojas%20volando%20--%3E%0A%20%20%3Cellipse%20cx%3D%22200%22%20cy%3D%22150%22%20rx%3D%2220%22%20ry%3D%2210%22%20fill%3D%22%2381C784%22%20opacity%3D%220.6%22%20transform%3D%22rotate%28-45%2C200%2C150%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%221250%22%20cy%3D%22200%22%20rx%3D%2220%22%20ry%3D%2210%22%20fill%3D%22%23AED581%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2830%2C1250%2C200%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%221100%22%20cy%3D%22800%22%20rx%3D%2216%22%20ry%3D%228%22%20fill%3D%22%2366BB6A%22%20opacity%3D%220.55%22%20transform%3D%22rotate%28-20%2C1100%2C800%29%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22300%22%20cy%3D%22650%22%20rx%3D%2218%22%20ry%3D%229%22%20fill%3D%22%23A5D6A7%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2850%2C300%2C650%29%22%2F%3E%0A%20%20%3C%21--%20Sol%20peque%C3%B1o%20esquina%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281380%2C80%29%20scale%280.7%29%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2228%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22-42%22%20x2%3D%220%22%20y2%3D%22-55%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2242%22%20x2%3D%220%22%20y2%3D%2255%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-42%22%20y1%3D%220%22%20x2%3D%22-55%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2242%22%20y1%3D%220%22%20x2%3D%2255%22%20y2%3D%220%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%22-30%22%20x2%3D%22-39%22%20y2%3D%22-39%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%22-30%22%20x2%3D%2239%22%20y2%3D%22-39%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22-30%22%20y1%3D%2230%22%20x2%3D%22-39%22%20y2%3D%2239%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%2239%22%20y2%3D%2239%22%20stroke%3D%22%23FFD54F%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
     }
 
     #pagina-galeria {
       background-color: #EDE7F6;
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Cohete%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281350%2C200%29%20scale%281.0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%22-50%22%20rx%3D%2218%22%20ry%3D%2230%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-18%22%20y%3D%22-25%22%20width%3D%2236%22%20height%3D%2260%22%20rx%3D%225%22%20fill%3D%22%23E1BEE7%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-18%2C35%20-28%2C60%200%2C45%2028%2C60%2018%2C35%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2212%22%20r%3D%2212%22%20fill%3D%22%23B3E5FC%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-26%2C-5%20-40%2C10%20-18%2C10%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%2226%2C-5%2040%2C10%2018%2C10%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3C%21--%20llama%20--%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-7%22%20cy%3D%2255%22%20rx%3D%225%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%227%22%20cy%3D%2255%22%20rx%3D%225%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2258%22%20rx%3D%224%22%20ry%3D%2210%22%20fill%3D%22%23FF9800%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Luna%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28100%2C130%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-40%20A40%2C40%200%201%2C0%2028%2C28%20A30%2C30%200%201%2C1%200%2C-40Z%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28750%2C820%29%20scale%280.75%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-40%20A40%2C40%200%201%2C0%2028%2C28%20A30%2C30%200%201%2C1%200%2C-40Z%22%20fill%3D%22%23FFCA28%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20de%205%20puntas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22300%2C80%20307%2C102%20330%2C102%20312%2C116%20319%2C138%20300%2C125%20281%2C138%20288%2C116%20270%2C102%20293%2C102%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.65%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221100%2C100%201105%2C118%201124%2C118%201109%2C129%201114%2C147%201100%2C137%201086%2C147%201091%2C129%201076%2C118%201095%2C118%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22200%2C750%20205%2C765%20221%2C765%20208%2C774%20213%2C789%20200%2C780%20187%2C789%20192%2C774%20179%2C765%20195%2C765%22%20fill%3D%22%23CE93D8%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221200%2C700%201205%2C715%201221%2C715%201208%2C724%201213%2C739%201200%2C730%201187%2C739%201192%2C724%201179%2C715%201195%2C715%22%20fill%3D%22%23BA68C8%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22600%2C50%20605%2C65%20621%2C65%20608%2C74%20613%2C89%20600%2C80%20587%2C89%20592%2C74%20579%2C65%20595%2C65%22%20fill%3D%22%23E040FB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%21--%20Planetas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281400%2C750%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2230%22%20fill%3D%22%2380CBC4%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2255%22%20ry%3D%2215%22%20fill%3D%22none%22%20stroke%3D%22%2380DEEA%22%20stroke-width%3D%225%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%22-10%22%20r%3D%228%22%20fill%3D%22%23B2EBF2%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Nubes%20nocturnas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28900%2C820%29%20scale%280.9%29%22%20opacity%3D%220.35%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2250%22%20ry%3D%2228%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-30%22%20cy%3D%225%22%20rx%3D%2232%22%20ry%3D%2222%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2230%22%20cy%3D%225%22%20rx%3D%2232%22%20ry%3D%2222%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
-      background-size: cover;
-      background-position: center;
+      --ceim-galeria-art: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20Cohete%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281350%2C200%29%20scale%281.0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%22-50%22%20rx%3D%2218%22%20ry%3D%2230%22%20fill%3D%22%23CE93D8%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-18%22%20y%3D%22-25%22%20width%3D%2236%22%20height%3D%2260%22%20rx%3D%225%22%20fill%3D%22%23E1BEE7%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-18%2C35%20-28%2C60%200%2C45%2028%2C60%2018%2C35%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2212%22%20r%3D%2212%22%20fill%3D%22%23B3E5FC%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-26%2C-5%20-40%2C10%20-18%2C10%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%2226%2C-5%2040%2C10%2018%2C10%22%20fill%3D%22%23FF80AB%22%2F%3E%0A%20%20%20%20%3C%21--%20llama%20--%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-7%22%20cy%3D%2255%22%20rx%3D%225%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%227%22%20cy%3D%2255%22%20rx%3D%225%22%20ry%3D%2212%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%2258%22%20rx%3D%224%22%20ry%3D%2210%22%20fill%3D%22%23FF9800%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Luna%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28100%2C130%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-40%20A40%2C40%200%201%2C0%2028%2C28%20A30%2C30%200%201%2C1%200%2C-40Z%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28750%2C820%29%20scale%280.75%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%2C-40%20A40%2C40%200%201%2C0%2028%2C28%20A30%2C30%200%201%2C1%200%2C-40Z%22%20fill%3D%22%23FFCA28%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Estrellas%20de%205%20puntas%20--%3E%0A%20%20%3Cpolygon%20points%3D%22300%2C80%20307%2C102%20330%2C102%20312%2C116%20319%2C138%20300%2C125%20281%2C138%20288%2C116%20270%2C102%20293%2C102%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.65%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221100%2C100%201105%2C118%201124%2C118%201109%2C129%201114%2C147%201100%2C137%201086%2C147%201091%2C129%201076%2C118%201095%2C118%22%20fill%3D%22%23FFB300%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22200%2C750%20205%2C765%20221%2C765%20208%2C774%20213%2C789%20200%2C780%20187%2C789%20192%2C774%20179%2C765%20195%2C765%22%20fill%3D%22%23CE93D8%22%20opacity%3D%220.6%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%221200%2C700%201205%2C715%201221%2C715%201208%2C724%201213%2C739%201200%2C730%201187%2C739%201192%2C724%201179%2C715%201195%2C715%22%20fill%3D%22%23BA68C8%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpolygon%20points%3D%22600%2C50%20605%2C65%20621%2C65%20608%2C74%20613%2C89%20600%2C80%20587%2C89%20592%2C74%20579%2C65%20595%2C65%22%20fill%3D%22%23E040FB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%21--%20Planetas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281400%2C750%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%2230%22%20fill%3D%22%2380CBC4%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2255%22%20ry%3D%2215%22%20fill%3D%22none%22%20stroke%3D%22%2380DEEA%22%20stroke-width%3D%225%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%22-10%22%20r%3D%228%22%20fill%3D%22%23B2EBF2%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Nubes%20nocturnas%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%28900%2C820%29%20scale%280.9%29%22%20opacity%3D%220.35%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2250%22%20ry%3D%2228%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-30%22%20cy%3D%225%22%20rx%3D%2232%22%20ry%3D%2222%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2230%22%20cy%3D%225%22%20rx%3D%2232%22%20ry%3D%2222%22%20fill%3D%22%23E8DAFF%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E");
     }
 
     #pagina-contacto {
       background-color: #FFF3E0;
       background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221440%22%20height%3D%22900%22%20viewBox%3D%220%200%201440%20900%22%3E%0A%20%20%3C%21--%20L%C3%A1pices%20de%20colores%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%2880%2C700%29%20rotate%28-30%2C0%2C0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%2290%22%20rx%3D%223%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-7%2C30%207%2C30%200%2C50%22%20fill%3D%22%23FFCA28%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-70%22%20width%3D%2214%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23FFD54F%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23FFAB91%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28120%2C700%29%20rotate%28-20%2C0%2C0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%2290%22%20rx%3D%223%22%20fill%3D%22%232196F3%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-7%2C30%207%2C30%200%2C50%22%20fill%3D%22%23BBDEFB%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-70%22%20width%3D%2214%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%2390CAF9%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23FFAB91%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28160%2C700%29%20rotate%28-10%2C0%2C0%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%2290%22%20rx%3D%223%22%20fill%3D%22%234CAF50%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22-7%2C30%207%2C30%200%2C50%22%20fill%3D%22%23DCEDC8%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-70%22%20width%3D%2214%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23A5D6A7%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22-7%22%20y%3D%22-60%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23FFAB91%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Globos%20fiesta%20--%3E%0A%20%20%3Cg%20transform%3D%22translate%281320%2C100%29%22%20opacity%3D%220.55%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-5%2C48%205%2C48%22%20fill%3D%22%23FF5252%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2248%22%20x2%3D%22-8%22%20y2%3D%22100%22%20stroke%3D%22%23FF8A80%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281370%2C150%29%20scale%280.85%29%22%20opacity%3D%220.5%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%23FFD740%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-5%2C48%205%2C48%22%20fill%3D%22%23FFD740%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2248%22%20x2%3D%225%22%20y2%3D%22100%22%20stroke%3D%22%23FFE57F%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281290%2C180%29%20scale%280.75%29%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2228%22%20ry%3D%2235%22%20fill%3D%22%2364FFDA%22%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%220%2C35%20-5%2C48%205%2C48%22%20fill%3D%22%2364FFDA%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2248%22%20x2%3D%220%22%20y2%3D%22100%22%20stroke%3D%22%23A7FFEB%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22-8%22%20cy%3D%22-12%22%20rx%3D%226%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3C%21--%20Confeti%20--%3E%0A%20%20%3Crect%20x%3D%22300%22%20y%3D%2250%22%20width%3D%2212%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23FF5252%22%20opacity%3D%220.6%22%20transform%3D%22rotate%2830%2C306%2C56%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22600%22%20y%3D%22100%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%23FFD740%22%20opacity%3D%220.55%22%20transform%3D%22rotate%28-20%2C605%2C105%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22900%22%20y%3D%2260%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%222%22%20fill%3D%22%2369F0AE%22%20opacity%3D%220.55%22%20transform%3D%22rotate%2845%2C907%2C67%29%22%2F%3E%0A%20%20%3Crect%20x%3D%221100%22%20y%3D%22120%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%2340C4FF%22%20opacity%3D%220.55%22%20transform%3D%22rotate%2815%2C1105%2C125%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22450%22%20y%3D%22800%22%20width%3D%2212%22%20height%3D%2212%22%20rx%3D%222%22%20fill%3D%22%23FF4081%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2860%2C456%2C806%29%22%2F%3E%0A%20%20%3Crect%20x%3D%22800%22%20y%3D%22850%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222%22%20fill%3D%22%23FFAB40%22%20opacity%3D%220.5%22%20transform%3D%22rotate%28-35%2C805%2C855%29%22%2F%3E%0A%20%20%3Crect%20x%3D%221200%22%20y%3D%22780%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%222%22%20fill%3D%22%23E040FB%22%20opacity%3D%220.5%22%20transform%3D%22rotate%2825%2C1207%2C787%29%22%2F%3E%0A%20%20%3C%21--%20Estrella%20grande%20--%3E%0A%20%20%3Cpolygon%20points%3D%22700%2C830%20707%2C852%20730%2C852%20713%2C866%20719%2C888%20700%2C875%20681%2C888%20687%2C866%20670%2C852%20693%2C852%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3C%21--%20Lunares%20decorativos%20--%3E%0A%20%20%3Ccircle%20cx%3D%22500%22%20cy%3D%22100%22%20r%3D%2210%22%20fill%3D%22%23FF80AB%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22400%22%20r%3D%228%22%20fill%3D%22%2364B5F6%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221100%22%20cy%3D%22500%22%20r%3D%2212%22%20fill%3D%22%23A5D6A7%22%20opacity%3D%220.4%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22350%22%20cy%3D%22700%22%20r%3D%229%22%20fill%3D%22%23FFD54F%22%20opacity%3D%220.5%22%2F%3E%0A%3C%2Fsvg%3E");
       background-size: cover;
-      background-position: center;
+      background-position: 46% 56%;
+      background-repeat: no-repeat;
     }
 
     .section-inner,
@@ -1112,31 +1139,31 @@
 
     .section-tag {
       display: block;
-      font-size: 0.65rem;
+      font-size: var(--ceim-eyebrow-size);
       font-weight: 900;
-      letter-spacing: 0.22em;
+      letter-spacing: var(--ceim-eyebrow-spacing);
       text-transform: uppercase;
       color: var(--blue-mid);
-      margin-bottom: 1.25rem;
+      margin-bottom: clamp(1rem, 2vh, 1.25rem);
     }
 
-    /* ── MASSIVE TITLE (Guayamurí style) ── */
     .section-title {
-      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-size: var(--ceim-heading-size);
       font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
+      line-height: var(--ceim-heading-lh);
+      letter-spacing: var(--ceim-heading-spacing);
+      margin-bottom: clamp(1rem, 2vh, 2rem);
       color: var(--ink);
       word-break: break-word;
     }
 
     .section-lead {
-      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      line-height: 1.85;
+      font-size: var(--ceim-text-size);
+      line-height: var(--ceim-text-lh);
       color: var(--muted);
-      max-width: 640px;
+      max-width: 520px;
       font-weight: 400;
+      margin-bottom: 2rem;
     }
 
     /* ── HERO ── */
@@ -1155,19 +1182,19 @@
 
     .hero-eyebrow {
       display: inline-block;
-      font-size: 0.65rem;
+      font-size: var(--ceim-eyebrow-size);
       font-weight: 900;
-      letter-spacing: 0.22em;
+      letter-spacing: var(--ceim-eyebrow-spacing);
       text-transform: uppercase;
       color: var(--blue-mid);
       margin-bottom: 2rem;
     }
 
     .hero-title {
-      font-size: clamp(2.2rem, 5.5vw, 5rem);
+      font-size: var(--ceim-heading-size);
       font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
+      line-height: var(--ceim-heading-lh);
+      letter-spacing: var(--ceim-heading-spacing);
       color: var(--ink);
       margin-bottom: 2rem;
       max-width: 900px;
@@ -1179,8 +1206,8 @@
     }
 
     .hero-desc {
-      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
-      line-height: 1.8;
+      font-size: var(--ceim-text-size);
+      line-height: var(--ceim-text-lh);
       color: var(--muted);
       max-width: 520px;
       margin-bottom: 2.5rem;
@@ -1410,7 +1437,7 @@
     }
 
     .tl-year {
-      font-size: 0.75rem;
+      font-size: var(--ceim-eyebrow-size);
       font-weight: 900;
       letter-spacing: 0.14em;
       color: var(--yellow);
@@ -1419,9 +1446,9 @@
     }
 
     .tl-text {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: rgba(255, 255, 255, 0.92);
+      font-size: var(--ceim-text-size);
+      line-height: var(--ceim-text-lh);
+      color: var(--muted);
     }
 
     /* ── MVV (white bg) ── */
@@ -1476,7 +1503,7 @@
     }
 
     .mvv-card h3 {
-      font-size: 1.4rem;
+      font-size: var(--ceim-card-title-size);
       font-weight: 900;
       margin-bottom: 1rem;
       letter-spacing: -0.01em;
@@ -1484,8 +1511,8 @@
     }
 
     .mvv-card p {
-      font-size: 0.88rem;
-      line-height: 1.8;
+      font-size: var(--ceim-text-size);
+      line-height: var(--ceim-text-lh);
       color: var(--muted);
     }
 
@@ -1670,3 +1697,1180 @@
     .hic {
       background: rgba(255, 255, 255, 0.88) !important;
     }
+
+/* ── Historia: arcoíris visible bajo nav y sobre bottom bar ── */
+#pagina-historia {
+  position: relative;
+  isolation: isolate;
+  background-image: none !important;
+  background-color: #fce4ec !important;
+}
+
+#pagina-historia::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-color: #fce4ec;
+  background-image: var(--ceim-historia-art);
+  background-size: cover;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+#pagina-historia #historia.historia-screen {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  padding: calc(var(--ceim-nav-h) + 1rem) clamp(1rem, 2.5vw, 2rem)
+    calc(var(--ceim-chrome-bottom) + 2rem);
+}
+
+/* ── Inicio: dibujos en zona de contenido (mismo patrón que Historia) ── */
+#pagina-inicio {
+  --ceim-nav-h: 4.25rem;
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  padding-bottom: 0 !important;
+  background-image: none !important;
+  background-color: #fffde7 !important;
+}
+
+#pagina-inicio::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-color: #fffde7;
+  background-image: var(--ceim-inicio-art);
+  background-size: cover;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+#pagina-inicio::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-image: var(--ceim-inicio-art);
+  background-size: cover;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 68%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 68%);
+}
+
+#pagina-inicio > #hero {
+  position: relative;
+  z-index: 1;
+}
+
+#pagina-inicio #hero.hero-screen {
+  min-height: 0 !important;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--ceim-nav-h) + 0.75rem) clamp(1rem, 2.5vw, 2rem)
+    calc(var(--ceim-chrome-bottom) + 0.35rem);
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+}
+
+#pagina-inicio .hero-layout {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 5rem);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  transform-origin: center center;
+}
+
+#pagina-inicio .hero-text {
+  position: relative;
+  z-index: 2;
+  flex: 0 1 auto;
+  min-width: 0;
+  width: auto;
+  max-width: min(62vw, 960px);
+  margin-right: auto;
+}
+
+#pagina-inicio .hero-visual {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#pagina-inicio .hero-title,
+#pagina-inicio .hero-desc,
+#pagina-inicio .hero-eyebrow {
+  text-shadow: 0 1px 14px rgba(255, 253, 231, 0.9);
+}
+
+#pagina-inicio .hero-eyebrow {
+  margin-bottom: clamp(1rem, 2vh, 2rem);
+}
+
+#pagina-inicio .hero-title {
+  margin-bottom: clamp(1rem, 2vh, 2rem);
+  font-size: var(--ceim-heading-size);
+  line-height: var(--ceim-heading-lh);
+  letter-spacing: var(--ceim-heading-spacing);
+  max-width: 900px;
+}
+
+#pagina-inicio .hero-desc {
+  margin-bottom: clamp(1.25rem, 2.5vh, 2.5rem);
+  font-size: var(--ceim-text-size);
+  line-height: var(--ceim-text-lh);
+  max-width: min(42vw, 580px);
+}
+
+#pagina-inicio .hero-ctas {
+  margin-bottom: clamp(1.25rem, 2.5vh, 2.5rem);
+  gap: 1rem;
+}
+
+#pagina-inicio .btn-primary,
+#pagina-inicio .btn-outline {
+  padding: 0.9rem 2.25rem;
+  font-size: 0.72rem;
+}
+
+#pagina-inicio .hero-info-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  max-width: min(58vw, 860px);
+}
+
+#pagina-inicio .hero-logo-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  width: 280px;
+  max-width: 100%;
+}
+
+/* Escudo flotante centrado sobre la tarjeta (misma columna) */
+#pagina-inicio .hero-shield-float {
+  width: clamp(180px, 18vw, 220px);
+  height: clamp(180px, 18vw, 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#pagina-inicio .hero-shield {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  animation: float 6s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+#pagina-inicio .hero-card {
+  width: 100%;
+  padding: 1.35rem 1.5rem;
+  margin: 0;
+}
+
+#pagina-inicio .hero-card p {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+}
+
+#pagina-inicio .stats-row {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+}
+
+#pagina-inicio .stat-num {
+  font-size: 1.6rem;
+}
+
+#pagina-inicio .hic {
+  padding: 0.95rem 1.1rem;
+  border-radius: 1.25rem;
+}
+
+#pagina-inicio .hic-icon {
+  font-size: 1.3rem;
+}
+
+#pagina-inicio .hic span {
+  font-size: 0.78rem;
+}
+
+/* Tarjetas translúcidas: se ven los dibujos del fondo */
+#pagina-inicio .hero-card,
+#pagina-inicio .hic {
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
+}
+
+#pagina-inicio .hic strong {
+  color: var(--blue);
+}
+
+#pagina-inicio .hero-card h3 {
+  color: var(--blue);
+}
+
+@media (max-height: 820px) {
+  #pagina-inicio .hero-layout {
+    transform: scale(0.94);
+  }
+}
+
+@media (max-height: 720px) {
+  #pagina-inicio .hero-layout {
+    transform: scale(0.88);
+  }
+}
+
+@media (max-width: 1024px) {
+  #pagina-inicio #hero.hero-screen {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #pagina-inicio .hero-layout {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  #pagina-inicio .hero-text {
+    max-width: none;
+    margin-right: 0;
+  }
+
+  #pagina-inicio .hero-visual {
+    display: none;
+    margin-left: 0;
+  }
+
+  #pagina-inicio .hero-title {
+    max-width: none;
+  }
+
+  #pagina-inicio .hero-desc {
+    max-width: none;
+  }
+
+  #pagina-inicio .hero-info-cards {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  #pagina-inicio #hero.hero-screen {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  #pagina-inicio .hero-info-cards {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  #pagina-inicio .hero-info-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── MVV: una pantalla + tarjetas mejoradas ── */
+#pagina-mvv {
+  --ceim-nav-h: 5.5rem;
+  --ceim-footer-h: 2.75rem;
+  --ceim-dots-h: 2rem;
+  height: 100%;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  padding-bottom: 0 !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+#pagina-mvv #mvv.mvv-screen {
+  min-height: 0 !important;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--ceim-nav-h) + 1rem) clamp(1rem, 2.5vw, 2rem)
+    calc(var(--ceim-chrome-bottom) + 0.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+#pagina-mvv .section-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 0;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 100%;
+}
+
+#pagina-mvv .section-tag {
+  margin-bottom: clamp(0.4rem, 1vh, 0.85rem);
+  flex-shrink: 0;
+}
+
+#pagina-mvv .section-title {
+  margin-bottom: clamp(0.65rem, 1.5vh, 1.15rem);
+  flex-shrink: 0;
+  font-size: clamp(1.85rem, 4.2vw, 3.75rem);
+}
+
+#pagina-mvv .mvv-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  align-items: stretch;
+}
+
+#pagina-mvv .mvv-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(1.25rem, 2vh, 2rem) clamp(1.15rem, 1.8vw, 1.5rem);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.52) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 4px 22px rgba(26, 58, 143, 0.07);
+  overflow: hidden;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+#pagina-mvv .mvv-card:hover {
+  background: rgba(255, 255, 255, 0.68) !important;
+  box-shadow: 0 8px 28px rgba(26, 58, 143, 0.1);
+  transform: translateY(-2px);
+}
+
+#pagina-mvv .mvv-card::after {
+  height: 3px;
+}
+
+#pagina-mvv .mvv-icon {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+#pagina-mvv .mvv-card h3 {
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+#pagina-mvv .mvv-card.mision h3 {
+  color: var(--blue);
+}
+
+#pagina-mvv .mvv-card.vision h3 {
+  color: var(--forest);
+}
+
+#pagina-mvv .mvv-card.valores h3 {
+  color: var(--ink);
+}
+
+#pagina-mvv .mvv-card p {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: var(--ceim-text-size);
+  line-height: var(--ceim-text-lh);
+}
+
+#pagina-mvv .values-pills {
+  margin-top: 0.75rem;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+#pagina-mvv .pill {
+  padding: 0.35rem 0.9rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0;
+  background: rgba(27, 58, 143, 0.08);
+  border: 1px solid rgba(27, 58, 143, 0.15);
+}
+
+/* Primera tarjeta: borde redondeado izquierdo; última: derecho (bloque unido como el index) */
+#pagina-mvv .mvv-card.mision {
+  border-radius: 1.25rem 0 0 1.25rem;
+}
+
+#pagina-mvv .mvv-card.vision {
+  border-radius: 0;
+}
+
+#pagina-mvv .mvv-card.valores {
+  border-radius: 0 1.25rem 1.25rem 0;
+}
+
+#pagina-mvv .mvv-card.mision::after,
+#pagina-mvv .mvv-card.vision::after,
+#pagina-mvv .mvv-card.valores::after {
+  border-radius: 0;
+}
+
+@media (max-height: 860px) {
+  #pagina-mvv .section-title {
+    font-size: clamp(1.55rem, 3.5vw, 2.75rem);
+  }
+
+  #pagina-mvv .mvv-card {
+    padding: 1rem 1.1rem;
+  }
+
+  #pagina-mvv .mvv-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #pagina-mvv {
+    height: auto;
+    max-height: none;
+    overflow-y: auto !important;
+    padding-bottom: 3.25rem !important;
+  }
+
+  #pagina-mvv #mvv.mvv-screen {
+    min-height: 100vh !important;
+    height: auto;
+    max-height: none;
+    padding: 6rem 5% 4rem;
+  }
+
+  #pagina-mvv .mvv-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #pagina-mvv .mvv-card.mision,
+  #pagina-mvv .mvv-card.vision,
+  #pagina-mvv .mvv-card.valores {
+    border-radius: 0;
+  }
+
+  #pagina-mvv .mvv-card:first-child {
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+
+  #pagina-mvv .mvv-card:last-child {
+    border-radius: 0 0 1.25rem 1.25rem;
+  }
+}
+
+/* ── Feriados: una pantalla + calendario escalable ── */
+#pagina-feriados {
+  --ceim-nav-h: 5.5rem;
+  --ceim-footer-h: 2.75rem;
+  --feriados-header-block: 11.5rem;
+  --feriados-art-bottom: 10rem;
+  --feriados-calendar-max-h: calc(
+    100dvh - var(--ceim-nav-h) - var(--ceim-chrome-bottom) - var(--feriados-header-block) -
+      var(--feriados-art-bottom) - 0.75rem
+  );
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  padding-bottom: 0 !important;
+  background-image: none !important;
+  background-color: #f1f8e9 !important;
+}
+
+/* Igual que Historia: ::before arriba (sol, hojas). ::after abajo sin tocar el SVG */
+#pagina-feriados::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-color: #f1f8e9;
+  background-image: var(--ceim-feriados-art);
+  background-size: cover;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+#pagina-feriados::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-image: var(--ceim-feriados-art);
+  background-size: cover;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 62%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 62%);
+}
+
+#pagina-feriados #feriados.feriados-screen {
+  position: relative;
+  z-index: 1;
+  min-height: 0 !important;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--ceim-nav-h) + 0.35rem) clamp(1.5rem, 4vw, 3.5rem)
+    calc(var(--ceim-chrome-bottom) + 0.35rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+#pagina-feriados .section-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  width: 100%;
+  max-width: min(560px, 82vw);
+  margin: 0 auto;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+#pagina-feriados .section-tag {
+  margin-bottom: clamp(0.5rem, 1vh, 0.85rem);
+  flex-shrink: 0;
+}
+
+#pagina-feriados .section-title {
+  margin-bottom: clamp(0.5rem, 1vh, 1rem);
+  flex-shrink: 0;
+  font-size: clamp(1.65rem, 3.8vw, 3.25rem);
+  line-height: var(--ceim-heading-lh);
+}
+
+#pagina-feriados .section-lead {
+  margin-bottom: clamp(0.75rem, 1.5vh, 1.25rem);
+  flex-shrink: 0;
+  max-width: 100%;
+  font-size: clamp(0.88rem, 1.5vw, var(--ceim-text-size));
+  line-height: 1.45;
+}
+
+#pagina-feriados .calendar-dashboard {
+  flex: 0 1 auto;
+  min-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+#pagina-feriados .calendar-card {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: min(var(--feriados-calendar-max-h), 100%);
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 2vh, 1.75rem);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#pagina-feriados .calendar-header {
+  margin-bottom: clamp(0.65rem, 1.2vh, 1.25rem);
+  flex-shrink: 0;
+}
+
+#pagina-feriados .calendar-header h3 {
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+}
+
+#pagina-feriados .cal-btn {
+  width: clamp(34px, 5vw, 40px);
+  height: clamp(34px, 5vw, 40px);
+  font-size: 0.9rem;
+}
+
+#pagina-feriados .calendar-weekdays {
+  flex-shrink: 0;
+  margin-bottom: clamp(0.4rem, 0.8vh, 0.75rem);
+  font-size: clamp(0.62rem, 1vw, 0.75rem);
+}
+
+#pagina-feriados .calendar-days {
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: clamp(0.25rem, 0.55vh, 0.5rem);
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  align-content: stretch;
+}
+
+#pagina-feriados .day-cell {
+  aspect-ratio: unset;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: clamp(0.5rem, 1vh, 1rem);
+}
+
+#pagina-feriados .day-number {
+  top: clamp(4px, 0.6vh, 8px);
+  left: clamp(5px, 0.8vw, 10px);
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+}
+
+#pagina-feriados .day-emoji {
+  font-size: clamp(0.7rem, 1.6vw, 1.05rem);
+}
+
+@media (max-height: 820px) {
+  #pagina-feriados {
+    --feriados-header-block: 9.5rem;
+    --feriados-art-bottom: 7.5rem;
+  }
+
+  #pagina-feriados .section-title {
+    font-size: clamp(1.45rem, 3.2vw, 2.35rem);
+  }
+
+  #pagina-feriados .section-lead {
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  #pagina-feriados .calendar-card {
+    padding: 0.85rem 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #pagina-feriados {
+    height: auto;
+    max-height: none;
+    overflow-y: auto !important;
+    padding-bottom: 3.25rem !important;
+  }
+
+  #pagina-feriados::before {
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: 50% 0%;
+  }
+
+  #pagina-feriados::after {
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: 50% 100%;
+    mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 62%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 62%);
+  }
+
+  #pagina-feriados #feriados.feriados-screen {
+    min-height: 100vh !important;
+    height: auto;
+    max-height: none;
+    padding: 6rem 5% 4rem;
+  }
+
+  #pagina-feriados .section-inner {
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  #pagina-feriados .calendar-card {
+    max-height: none;
+    flex: none;
+  }
+
+  #pagina-feriados .calendar-days {
+    grid-template-rows: none;
+  }
+
+  #pagina-feriados .day-cell {
+    min-height: 46px;
+    aspect-ratio: 1;
+    max-height: none;
+  }
+}
+
+/* ── Galería: dibujos bajo nav (mismo patrón que Historia) ── */
+#pagina-galeria {
+  --ceim-nav-h: 5.5rem;
+  --ceim-footer-h: 2.75rem;
+  --ceim-dots-h: 2rem;
+  --galeria-header-block: 8.75rem;
+  --galeria-carousel-h: min(
+    calc(
+      100dvh - var(--ceim-nav-h) - var(--ceim-chrome-bottom) - var(--galeria-header-block) - 1rem
+    ),
+    566px
+  );
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  padding-bottom: 0 !important;
+  background-image: none !important;
+  background-color: #ede7f6 !important;
+}
+
+#pagina-galeria::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-color: #ede7f6;
+  background-image: var(--ceim-galeria-art);
+  background-size: cover;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+#pagina-galeria::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: var(--ceim-nav-h);
+  bottom: var(--ceim-chrome-bottom);
+  background-image: var(--ceim-galeria-art);
+  background-size: cover;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, #000 0%, #000 42%, transparent 65%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 42%, transparent 65%);
+}
+
+#pagina-galeria #galeria.galeria-screen {
+  position: relative;
+  z-index: 1;
+  min-height: 0 !important;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--ceim-nav-h) + 0.35rem) clamp(1rem, 2.5vw, 2rem)
+    calc(var(--ceim-chrome-bottom) + 0.35rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+#pagina-galeria .section-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+  max-height: 100%;
+  width: 100%;
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+  padding-bottom: 0;
+}
+
+#pagina-galeria .section-tag {
+  margin-bottom: 0.35rem;
+  flex-shrink: 0;
+}
+
+#pagina-galeria .section-title {
+  margin-bottom: 0.4rem;
+  flex-shrink: 0;
+  font-size: clamp(1.85rem, 4.2vw, 3.75rem);
+}
+
+#pagina-galeria .section-lead {
+  margin-bottom: clamp(0.85rem, 1.8vh, 1.35rem);
+  flex-shrink: 0;
+}
+
+#pagina-galeria .carousel-root {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+
+#pagina-galeria .carousel-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+#pagina-galeria .carousel-track {
+  height: auto;
+}
+
+#pagina-galeria .carousel-slide {
+  min-width: 100%;
+  width: 100%;
+  aspect-ratio: 1080 / 566;
+  max-height: var(--galeria-carousel-h);
+  height: auto;
+  flex-shrink: 0;
+}
+
+#pagina-galeria .slide-caption {
+  padding: clamp(1.25rem, 2.5vh, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+#pagina-galeria .slide-caption h3 {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  margin-bottom: 0.35rem;
+}
+
+#pagina-galeria .slide-caption p {
+  font-size: clamp(0.78rem, 1.2vw, 0.85rem);
+}
+
+#pagina-galeria .carousel-dots {
+  margin-top: clamp(0.65rem, 1.2vh, 1.25rem);
+  flex-shrink: 0;
+}
+
+#pagina-galeria .upload-hint {
+  margin-top: clamp(0.4rem, 0.9vh, 0.75rem);
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+@media (max-height: 820px) {
+  #pagina-galeria {
+    --galeria-header-block: 7.25rem;
+  }
+
+  #pagina-galeria .section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  }
+
+  #pagina-galeria .section-lead {
+    margin-bottom: 0.65rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #pagina-galeria {
+    height: auto;
+    max-height: none;
+    overflow-y: auto !important;
+    padding-bottom: 3.25rem !important;
+  }
+
+  #pagina-galeria::before,
+  #pagina-galeria::after {
+    top: 0;
+    bottom: 0;
+  }
+
+  #pagina-galeria #galeria.galeria-screen {
+    min-height: 100vh !important;
+    height: auto;
+    max-height: none;
+    padding: 6rem 5% 4rem;
+  }
+
+  #pagina-galeria .carousel-wrap {
+    width: 100%;
+  }
+
+  #pagina-galeria .carousel-slide {
+    aspect-ratio: 1080 / 566;
+    max-height: min(62vw, 566px);
+    height: auto;
+  }
+}
+
+/* ── Contacto: una pantalla, tarjeta mapa alineada ── */
+#pagina-contacto {
+  --ceim-nav-h: 5.5rem;
+  --ceim-footer-h: 2.75rem;
+  height: 100%;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  padding-bottom: 0 !important;
+  background-size: cover !important;
+  background-position: 46% 56% !important;
+  background-repeat: no-repeat !important;
+}
+
+#pagina-contacto #contacto.contacto-screen {
+  min-height: 0 !important;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--ceim-nav-h) + 0.5rem) clamp(1rem, 2.5vw, 2rem)
+    calc(var(--ceim-chrome-bottom) + 0.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+#pagina-contacto .section-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  width: 100%;
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+#pagina-contacto .section-tag {
+  margin-bottom: clamp(0.85rem, 1.8vh, 1.25rem);
+  flex-shrink: 0;
+}
+
+#pagina-contacto .section-title {
+  margin-bottom: clamp(1rem, 2vh, 2rem);
+  flex-shrink: 0;
+  font-size: var(--ceim-heading-size);
+  line-height: var(--ceim-heading-lh);
+}
+
+#pagina-contacto .section-lead {
+  margin-bottom: clamp(1.25rem, 2.5vh, 2rem);
+  flex-shrink: 0;
+  max-width: 520px;
+  font-size: var(--ceim-text-size);
+  line-height: var(--ceim-text-lh);
+}
+
+#pagina-contacto .contact-grid {
+  flex: 0 1 auto;
+  min-height: 0;
+  margin-top: clamp(1.5rem, 2.8vh, 3rem);
+  gap: clamp(2rem, 3.5vw, 4rem);
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+#pagina-contacto .contact-detail {
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+#pagina-contacto .contact-detail:last-child {
+  margin-bottom: 0;
+}
+
+#pagina-contacto .contact-map {
+  min-height: 200px;
+  height: auto;
+  align-self: start;
+  width: 100%;
+  padding: 2.5rem;
+  justify-content: center;
+}
+
+#pagina-contacto .contact-map .map-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#pagina-contacto .contact-map p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+#pagina-contacto .contact-map-hint {
+  margin-top: 1rem;
+}
+
+@media (max-height: 820px) {
+  #pagina-contacto .section-title {
+    font-size: clamp(1.65rem, 3.8vw, 2.75rem);
+  }
+
+  #pagina-contacto .section-lead {
+    margin-bottom: 1rem;
+  }
+
+  #pagina-contacto .contact-grid {
+    margin-top: 1.25rem;
+    gap: 2rem;
+  }
+
+  #pagina-contacto .contact-detail {
+    margin-bottom: 1.1rem;
+  }
+
+  #pagina-contacto .contact-map {
+    min-height: 180px;
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #pagina-contacto {
+    height: auto;
+    max-height: none;
+    overflow-y: auto !important;
+    padding-bottom: 3.25rem !important;
+  }
+
+  #pagina-contacto #contacto.contacto-screen {
+    min-height: 100vh !important;
+    height: auto;
+    max-height: none;
+    padding: 6rem 5% 4rem;
+  }
+
+  #pagina-contacto .section-inner {
+    overflow: visible;
+  }
+
+  #pagina-contacto .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  #pagina-contacto .contact-map {
+    min-height: 200px;
+    max-height: none;
+  }
+}
+
+/* Cuerpo de secciones: misma escala que tarjetas / texto de Inicio */
+.ceim-page:not(#pagina-inicio) .contact-detail strong {
+  font-size: var(--ceim-label-size);
+  letter-spacing: 0.1em;
+}
+
+.ceim-page:not(#pagina-inicio) .contact-detail span,
+.ceim-page:not(#pagina-inicio) .contact-detail a {
+  font-size: var(--ceim-small-size);
+  line-height: var(--ceim-text-lh);
+}
+
+.ceim-page:not(#pagina-inicio) .contact-map p,
+.ceim-page:not(#pagina-inicio) .contact-map-hint {
+  font-size: var(--ceim-small-size);
+  line-height: var(--ceim-text-lh);
+}
+
+.ceim-page:not(#pagina-inicio) .hero-card h3 {
+  font-size: var(--ceim-card-title-size);
+}
+
+.ceim-page:not(#pagina-inicio) .hero-card p {
+  font-size: var(--ceim-text-size);
+  line-height: var(--ceim-text-lh);
+}
+
+.ceim-page:not(#pagina-inicio) .feriado-nombre {
+  font-size: var(--ceim-card-title-size);
+}
+
+.ceim-page:not(#pagina-inicio) .feriado-desc {
+  font-size: var(--ceim-text-size);
+  line-height: var(--ceim-text-lh);
+}
+
+.ceim-page:not(#pagina-inicio) .feriado-fecha,
+.ceim-page:not(#pagina-inicio) .feriado-tipo {
+  font-size: var(--ceim-small-size);
+}
+
+.ceim-page:not(#pagina-inicio) .values-pills .pill {
+  font-size: var(--ceim-small-size);
+}
