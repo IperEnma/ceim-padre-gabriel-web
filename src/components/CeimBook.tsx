@@ -58,33 +58,27 @@ export function CeimBook() {
 
   function dismissSwipeHint() {
     setShowSwipeHint(false);
-    try {
-      sessionStorage.setItem("ceim-swipe-hint-seen", "1");
-    } catch {
-      /* ignore storage errors */
-    }
   }
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
     let hideTimer: number | undefined;
 
-    function maybeShowHint() {
-      if (!mq.matches) return;
-      try {
-        if (sessionStorage.getItem("ceim-swipe-hint-seen")) return;
-      } catch {
-        /* ignore storage errors */
+    function showHintIfMobile() {
+      if (!mq.matches) {
+        setShowSwipeHint(false);
+        return;
       }
       setShowSwipeHint(true);
+      if (hideTimer) window.clearTimeout(hideTimer);
       hideTimer = window.setTimeout(dismissSwipeHint, 4200);
     }
 
-    maybeShowHint();
-    mq.addEventListener("change", maybeShowHint);
+    showHintIfMobile();
+    mq.addEventListener("change", showHintIfMobile);
 
     return () => {
-      mq.removeEventListener("change", maybeShowHint);
+      mq.removeEventListener("change", showHintIfMobile);
       if (hideTimer) window.clearTimeout(hideTimer);
     };
   }, []);
